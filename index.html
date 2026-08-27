@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>Khan’s Restaurant | Bayswater London</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0d0d0d;
+  color:#fff;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  background:#111;
+}
+
+.hero video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      rgba(0,0,0,.48),
+      rgba(0,0,0,.78)
+    );
+  z-index:1;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:30px 20px;
+  max-width:850px;
+}
+
+.eyebrow{
+  letter-spacing:5px;
+  font-size:12px;
+  text-transform:uppercase;
+  opacity:.9;
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-size:clamp(55px,13vw,110px);
+  line-height:.9;
+  margin:20px 0 10px;
+  letter-spacing:3px;
+}
+
+.hero-subtitle{
+  font-size:19px;
+  letter-spacing:4px;
+  margin-bottom:14px;
+}
+
+.est{
+  font-size:11px;
+  letter-spacing:4px;
+  opacity:.8;
+  margin-bottom:35px;
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  padding:15px 22px;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:4px;
+  background:rgba(255,255,255,.09);
+  backdrop-filter:blur(8px);
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.btn.primary{
+  background:#fff;
+  color:#111;
+  border-color:#fff;
+}
+
+.scroll{
+  position:absolute;
+  bottom:22px;
+  left:0;
+  right:0;
+  z-index:2;
+  font-size:10px;
+  letter-spacing:3px;
+  opacity:.65;
+}
+
+/* SECTIONS */
+
+section{
+  padding:75px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+
+.section-title{
+  text-align:center;
+  font-family:Georgia,serif;
+  font-size:40px;
+  margin:0 0 12px;
+}
+
+.section-sub{
+  text-align:center;
+  color:#aaa;
+  max-width:700px;
+  margin:0 auto 40px;
+  line-height:1.7;
+}
+
+/* QUICK CARDS */
+
+.quick{
+  background:#151515;
+  max-width:none;
+}
+
+.quick-inner{
+  max-width:1100px;
+  margin:auto;
+}
+
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  padding:30px 20px;
+  background:#202020;
+  border:1px solid #303030;
+  border-radius:10px;
+  text-align:center;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+}
+
+.icon{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  font-family:Georgia,serif;
+  margin:5px 0 8px;
+}
+
+.card p{
+  color:#aaa;
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* MENU */
+
+.menu{
+  background:#fafafa;
+  color:#161616;
+  max-width:none;
+}
+
+.menu-inner{
+  max-width:1100px;
+  margin:auto;
+}
+
+.categories{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding:5px 0 25px;
+  justify-content:center;
+}
+
+.cat{
+  white-space:nowrap;
+  padding:11px 17px;
+  border:1px solid #ccc;
+  border-radius:30px;
+  background:white;
+  color:#222;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.menu-section{
+  margin-bottom:35px;
+}
+
+.menu-section h3{
+  font-family:Georgia,serif;
+  font-size:30px;
+  border-bottom:1px solid #ddd;
+  padding-bottom:11px;
+  margin:30px 0 8px;
+}
+
+.item{
+  padding:15px 0;
+  border-bottom:1px solid #e8e8e8;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.item strong{
+  font-size:15px;
+}
+
+.item small{
+  display:block;
+  color:#666;
+  line-height:1.5;
+  margin-top:5px;
+  max-width:750px;
+}
+
+.price{
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+/* INFO */
+
+.info{
+  background:#121212;
+  max-width:none;
+}
+
+.info-inner{
+  max-width:1100px;
+  margin:auto;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.info-box{
+  background:#1e1e1e;
+  padding:30px;
+  border-radius:10px;
+  border:1px solid #292929;
+}
+
+.info-box h3{
+  font-family:Georgia,serif;
+  font-size:26px;
+  margin-top:0;
+}
+
+.info-box p{
+  color:#aaa;
+  line-height:1.7;
+}
+
+.big-link{
+  display:inline-block;
+  margin-top:8px;
+  padding:13px 17px;
+  border:1px solid #555;
+  border-radius:4px;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:.5px;
+}
+
+/* SHARE */
+
+.share-section{
+  text-align:center;
+  background:#171717;
+  max-width:none;
+}
+
+.share-btn{
+  display:inline-block;
+  padding:15px 28px;
+  border-radius:4px;
+  background:#fff;
+  color:#111;
+  font-weight:bold;
+  font-size:13px;
+}
+
+/* FOOTER */
+
+footer{
+  text-align:center;
+  padding:45px 20px;
+  background:#090909;
+  color:#888;
+  font-size:12px;
+  line-height:1.8;
+}
+
+footer strong{
+  color:#fff;
+  font-family:Georgia,serif;
+  font-size:23px;
+}
+
+/* MOBILE */
+
+@media(max-width:760px){
+
+  section{
+    padding:58px 17px;
+  }
+
+  .quick-grid{
+    grid-template-columns:1fr;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .categories{
+    justify-content:flex-start;
+  }
+
+  .hero h1{
+    font-size:64px;
+  }
+
+  .hero-subtitle{
+    font-size:16px;
+  }
+
+  .buttons{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .btn{
+    width:100%;
+    max-width:320px;
+  }
+
+  .item{
+    gap:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+
+<header class="hero">
+
+  <!--
+  Put your restaurant video in the same GitHub folder
+  and name it: hero.mp4
+  -->
+
+  <video autoplay muted loop playsinline poster="hero.jpg">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      Authentic Indian Food
+    </div>
+
+    <h1>KHAN’S</h1>
+
+    <div class="hero-subtitle">
+      RESTAURANT
+    </div>
+
+    <div class="est">
+      EST. 1977 • BAYSWATER • LONDON
+    </div>
+
+    <div class="buttons">
+
+      <a class="btn primary" href="#menu">
+        🍽️ VIEW MENU
+      </a>
+
+      <a class="btn"
+         href="tel:02077275420">
+        📞 CALL US
+      </a>
+
+      <a class="btn"
+         target="_blank"
+         href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
+        📍 DIRECTIONS
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="scroll">
+    SCROLL TO EXPLORE ↓
+  </div>
+
+</header>
+
+
+<!-- WELCOME -->
+
+<section class="quick">
+
+<div class="quick-inner">
+
+  <h2 class="section-title">
+    Welcome to Khan’s
+  </h2>
+
+  <p class="section-sub">
+    Authentic Indian food in the heart of Bayswater.
+    Explore our menu, find the restaurant and connect
+    with Khan’s in one simple place.
+  </p>
+
+  <div class="quick-grid">
+
+    <a class="card" href="#menu">
+
+      <div class="icon">🍛</div>
+
+      <h3>
+        Our Menu
+      </h3>
+
+      <p>
+        Explore starters, tandoori specialities,
+        curries, biryani, breads, drinks and more.
+      </p>
+
+    </a>
+
+
+    <a class="card" href="tel:02077275420">
+
+      <div class="icon">📞</div>
+
+      <h3>
+        Call Us
+      </h3>
+
+      <p>
+        0207 727 5420
+      </p>
+
+    </a>
+
+
+    <a class="card"
+       target="_blank"
+       href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
+
+      <div class="icon">📍</div>
+
+      <h3>
+        Find Us
+      </h3>
+
+      <p>
+        13–15 Westbourne Grove<br>
+        London, W2 4UA
+      </p>
+
+    </a>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- MENU -->
+
+<section id="menu" class="menu">
+
+<div class="menu-inner">
+
+  <h2 class="section-title">
+    Our Menu
+  </h2>
+
+  <p class="section-sub">
+    All prices include VAT.
+    Please speak to our staff about allergies
+    or spice adjustments.
+  </p>
+
+
+  <div class="categories">
+
+    <a class="cat" href="#starters">Starters</a>
+    <a class="cat" href="#tandoori">Tandoori</a>
+    <a class="cat" href="#chicken">Chicken</a>
+    <a class="cat" href="#meat">Meat</a>
+    <a class="cat" href="#seafood">Seafood</a>
+    <a class="cat" href="#vegetable">Vegetable</a>
+    <a class="cat" href="#biryani">Biryani</a>
+    <a class="cat" href="#drinks">Drinks</a>
+
+  </div>
+
+
+  <!-- STARTERS -->
+
+  <div id="starters" class="menu-section">
+
+    <h3>Starters</h3>
+
+    <div class="item">
+      <div>
+        <strong>Tray Of Chutney</strong>
+      </div>
+      <span class="price">£1.75</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Pappadam</strong>
+      </div>
+      <span class="price">£1.75 each</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Onions Bhaji (D/G)</strong>
+        <small>
+          Crispy fritters made from thinly sliced onions,
+          seasoned with aromatic spices.
+        </small>
+      </div>
+      <span class="price">£6.45</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Veg Samosa (G)</strong>
+        <small>Portion of two.</small>
+      </div>
+      <span class="price">£5.50</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Meat Samosa (G/D/N)</strong>
+        <small>Portion of two.</small>
+      </div>
+      <span class="price">£5.50</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Chilli Paneer (D)</strong>
+        <small>
+          Paneer cubes and peppers tossed in homemade sauce.
+        </small>
+      </div>
+      <span class="price">£8.99</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Khans Masala Chips</strong>
+        <small>
+          Tossed in Khan’s homemade sauce.
+          Contains molluscs.
+        </small>
+      </div>
+      <span class="price">£5.75</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Dal Soup</strong>
+        <small>
+          Smashed lentils flavoured with apple and Indian spice.
+        </small>
+      </div>
+      <span class="price">£5.75</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Fish Amritsari</strong>
+        <small>
+          Tilapia pieces coated in gram flour and spices,
+          deep fried.
+        </small>
+      </div>
+      <span class="price">£14.00</span>
+    </div>
+
+  </div>
+
+
+  <!-- BOMBAY -->
+
+  <div class="menu-section">
+
+    <h3>Bombay Chowpatty</h3>
+
+    <div class="item">
+      <div>
+        <strong>Samosa Chaat (D/G)</strong>
+        <small>
+          Punjabi samosa in yoghurt, green chutney,
+          tamarind sauce, sev and dry plum sauce.
+        </small>
+      </div>
+      <span class="price">£7.95</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Channa Chaat (D/G)</strong>
+        <small>
+          Chickpeas, potatoes, crispy snacks, sweet yogurt,
+          tamarind sauce, mint coriander sauce and sev.
+        </small>
+      </div>
+      <span class="price">£6.90</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Gol Gappe (D/G)</strong>
+        <small>
+          Wheat puffs filled with masala potatoes.
+          Served with sweet and sour tamarind water shots.
+        </small>
+      </div>
+      <span class="price">£6.25</span>
+    </div>
+
+    <div class="item">
+      <div>
+        <strong>Dhahi Puri (D)</strong>
+        <small>
+          Wheat puffs filled with sweet yogurt, chutney,
+          tamarind sauce, sev and pomegranate.
+        </small>
+      </div>
+      <span class="price">£6.25</span>
+    </div>
+
+  </div>
+
+
+  <!-- TANDOORI -->
+
+  <div id="tandoori" class="menu-section">
+
+    <h3>Tandoori Specialities</h3>
+
+    <div class="item">
+      <div><strong>Full Tandoori Chicken (D/M)</strong>
+      <small>Tangy chicken cooked in tandoor.</small></div>
+      <span class="price">£14.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Half Tandoori Chicken (D/M)</strong></div>
+      <span class="price">£9.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Grilled Lamb Chops (D/M/N)</strong>
+      <small>Chops marinated with special ground spices and cooked in charcoal grill.</small></div>
+      <span class="price">£14.99</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Tandoori Chicken Wings (D)</strong>
+      <small>Chicken wings on the bone marinated in Khan’s paste and barbequed on a skewer.</small></div>
+      <span class="price">£8.00</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Tikka (D/M)</strong>
+      <small>Diced chicken prepared in spices and barbequed in clay oven.</small></div>
+      <span class="price">£11.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Meat Sheek Kebab</strong>
+      <small>Spiced mince meat skewers cooked in clay oven.</small></div>
+      <span class="price">£13.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Lamb Ribs (D)</strong>
+      <small>Cooked in special sauce.</small></div>
+      <span class="price">£13.99</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Tandoori King Prawns (D)</strong>
+      <small>Caraway seeds with spicy yoghurt marinated king prawns, charcoal grilled.</small></div>
+      <span class="price">£17.99</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Fish Tikka</strong>
+      <small>Cod fish with mustard.</small></div>
+      <span class="price">£15.00</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Paneer Tikka (D/M)</strong>
+      <small>Spiced yogurt, cube of cottage cheese grilled in a clay oven.</small></div>
+      <span class="price">£10.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Mixed Grill (D/G/N/M)</strong>
+      <small>
+        Lamb chops, meat sheek kebab, tandoori chicken,
+        chicken tikka and chicken wings charcoal grilled.
+        Served with naan.
+      </small></div>
+      <span class="price">£24.00</span>
+    </div>
+
+  </div>
+
+
+  <!-- FUSION -->
+
+  <div class="menu-section">
+
+    <h3>Fusion Dishes</h3>
+
+    <div class="item">
+      <div><strong>Lamb Shank (D)</strong>
+      <small>Shank of lamb cooked in an intense aromatic curry on bone stock and spices — Lucknowi style.</small></div>
+      <span class="price">£19.99</span>
+    </div>
+
+    <div class="item">
+      <div><strong>King Prawn Zaffroni</strong>
+      <small>Grilled prawns served with saffron rice and moily sauce.</small></div>
+      <span class="price">£19.99</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Lollipops</strong>
+      <small>Portion of five. Chicken lollipops tossed in Khan’s homemade sauce.</small></div>
+      <span class="price">£8.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Sweet & Chilli Prawns</strong>
+      <small>Deep fried tiger prawns Maharashtrian style.</small></div>
+      <span class="price">£14.00</span>
+    </div>
+
+  </div>
+
+
+  <!-- CHICKEN -->
+
+  <div id="chicken" class="menu-section">
+
+    <h3>Chicken Dishes</h3>
+
+    <div class="item">
+      <div><strong>Butter Chicken (D/M/N)</strong>
+      <small>An all-time favourite, barbecued chicken tikka simmered in rich tomato butter sauce.</small></div>
+      <span class="price">£13.60</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Tikka Masala (D/M/N)</strong>
+      <small>Diced chicken cooked in masala sauce and coconut.</small></div>
+      <span class="price">£12.60</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Chilli Masala (D)</strong>
+      <small>Chicken tikka cooked in hot spicy chilli sauce and roasted fresh garlic.</small></div>
+      <span class="price">£12.60</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Jalfrezi (D)</strong>
+      <small>Chicken strips tossed in onions and bell pepper.</small></div>
+      <span class="price">£12.60</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Bhuna (M)</strong>
+      <small>Fairly dry medium chicken curry.</small></div>
+      <span class="price">£11.60</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Saag Chicken (M)</strong>
+      <small>Cubes of chicken cooked with fresh spinach, tempered garlic and cumin seeds.</small></div>
+      <span class="price">£11.60</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Korma</strong>
+      <small>Mild chicken with cream, coconut and nuts.</small></div>
+      <span class="price">£11.25</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Bourji</strong>
+      <small>Boneless chicken cooked in onions, yoghurt and coconut.</small></div>
+      <span class="price">£12.60</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Curry</strong>
+      <small>Other options — Madras or Vindaloo.</small></div>
+      <span class="price">£11.25</span>
+    </div>
+
+  </div>
+
+
+  <!-- MEAT -->
+
+  <div id="meat" class="menu-section">
+
+    <h3>Meat Dishes</h3>
+
+    <div class="item">
+      <div><strong>Meat Curry</strong>
+      <small>Other options — Madras or Vindaloo.</small></div>
+      <span class="price">£12.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Bhuna Gosht</strong>
+      <small>Boneless lamb pieces, cooked with onions and tomatoes based bhuna masala.</small></div>
+      <span class="price">£12.75</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Karahi Gosht</strong>
+      <small>Lamb on bone in a spicy sauce with onion, peppers and karahi masala.</small></div>
+      <span class="price">£13.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Saag Gosht</strong>
+      <small>Tender lamb cooked with spices, fresh spinach, garlic and cumin seeds.</small></div>
+      <span class="price">£12.75</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Rogan Josh</strong>
+      <small>A classic Kashmiri delicacy. Diced lamb cooked in rich sauce of onion and tomatoes, finished with almond flakes.</small></div>
+      <span class="price">£12.75</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Keema Mutter & Potato</strong>
+      <small>Minced lamb, potatoes, peas and spices cooked Hyderabad style.</small></div>
+      <span class="price">£11.95</span>
+    </div>
+
+  </div>
+
+
+  <!-- SEAFOOD -->
+
+  <div id="seafood" class="menu-section">
+
+    <h3>Seafood Dishes</h3>
+
+    <div class="item">
+      <div><strong>Tandoori King Prawn Masala (D/M/N)</strong>
+      <small>Tandoori king prawns in cashew and tomato sauce.</small></div>
+      <span class="price">£18.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>King Prawns Bhuna</strong>
+      <small>Tiger prawns in a reduced curry sauce.</small></div>
+      <span class="price">£16.99</span>
+    </div>
+
+    <div class="item">
+      <div><strong>King Prawn Curry</strong>
+      <small>Prawns cooked in special homemade sauce.</small></div>
+      <span class="price">£16.75</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Fish Tikka Curry (D/M)</strong>
+      <small>Cod served with special homemade sauce.</small></div>
+      <span class="price">£16.50</span>
+    </div>
+
+  </div>
+
+
+  <!-- VEGETABLE -->
+
+  <div id="vegetable" class="menu-section">
+
+    <h3>Vegetable Dishes</h3>
+
+    <div class="item">
+      <div><strong>Paneer Tikka Masala (D/N)</strong>
+      <small>Cottage cheese cooked in tandoor and masala sauce.</small></div>
+      <span class="price">£12.25</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Saag Aloo (M)</strong>
+      <small>Potato, fresh spinach, garlic and cumin.</small></div>
+      <span class="price">£8.20</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Bombay Aloo (M)</strong></div>
+      <span class="price">£8.20</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Saag Bhaji (M)</strong>
+      <small>Fresh chopped spinach tossed with garlic and cumin.</small></div>
+      <span class="price">£8.20</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Saag Paneer (D/N)</strong>
+      <small>Spinach cooked with home-made cheese.</small></div>
+      <span class="price">£8.20</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Bhindi Bhaji (D/N)</strong>
+      <small>Diced okra in dry masala sauce.</small></div>
+      <span class="price">£8.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Mixed Veg Curry</strong></div>
+      <span class="price">£8.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Dal Makhani (D)</strong>
+      <small>A creamy textured black lentil delicacy.</small></div>
+      <span class="price">£9.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Tadka Dal (M)</strong></div>
+      <span class="price">£8.20</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chana Masala</strong></div>
+      <span class="price">£8.20</span>
+    </div>
+
+  </div>
+
+
+  <!-- THALI -->
+
+  <div class="menu-section">
+
+    <h3>Thalis</h3>
+
+    <div class="item">
+      <div><strong>Veg Thali (D/G/N/M)</strong>
+      <small>
+        Paneer tikka, veg samosa, saag aloo, dal makhani,
+        veg curry, rice, naan, pappadam, salad,
+        raita and gulab jamun.
+      </small></div>
+      <span class="price">£21.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Non-Veg Thali (D/G/N/M)</strong>
+      <small>
+        Chicken tikka, sheek kebab, butter chicken,
+        bhuna gosht, tadka dal, rice, naan, pappadam,
+        salad, raita and gulab jamun.
+      </small></div>
+      <span class="price">£25.00</span>
+    </div>
+
+  </div>
+
+
+  <!-- BIRYANI -->
+
+  <div id="biryani" class="menu-section">
+
+    <h3>Biryani</h3>
+
+    <div class="item">
+      <div><strong>Meat Biryani (D)</strong></div>
+      <span class="price">£14.25</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Biryani (D)</strong></div>
+      <span class="price">£13.75</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Tikka Biryani</strong></div>
+      <span class="price">£14.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>King Prawn Biryani (D)</strong></div>
+      <span class="price">£18.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Vegetable Biryani (D)</strong></div>
+      <span class="price">£11.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Fish Tikka Biryani (D)</strong></div>
+      <span class="price">£16.50</span>
+    </div>
+
+  </div>
+
+
+  <!-- BREADS -->
+
+  <div class="menu-section">
+
+    <h3>Breads</h3>
+
+    <div class="item"><div><strong>Tandoori Naan (D/G)</strong></div><span class="price">£3.55</span></div>
+    <div class="item"><div><strong>Tandoori Roti (G)</strong></div><span class="price">£3.55</span></div>
+    <div class="item"><div><strong>Garlic Naan (D/G)</strong></div><span class="price">£4.75</span></div>
+    <div class="item"><div><strong>Peshawari Naan (D/G/N)</strong></div><span class="price">£4.99</span></div>
+    <div class="item"><div><strong>Keema Naan (D/G)</strong></div><span class="price">£4.99</span></div>
+    <div class="item"><div><strong>Paratha (G)</strong></div><span class="price">£4.50</span></div>
+    <div class="item"><div><strong>Paneer Kulcha</strong></div><span class="price">£4.99</span></div>
+
+  </div>
+
+
+  <!-- RICE -->
+
+  <div class="menu-section">
+
+    <h3>Rice</h3>
+
+    <div class="item"><div><strong>Pilau Rice</strong></div><span class="price">£4.60</span></div>
+    <div class="item"><div><strong>Rice</strong></div><span class="price">£4.35</span></div>
+    <div class="item"><div><strong>Special Fried Rice (D)</strong></div><span class="price">£7.50</span></div>
+    <div class="item"><div><strong>Biryani Rice</strong></div><span class="price">£7.50</span></div>
+    <div class="item"><div><strong>Keema Rice</strong></div><span class="price">£8.50</span></div>
+
+  </div>
+
+
+  <!-- SIDES -->
+
+  <div class="menu-section">
+
+    <h3>Sides</h3>
+
+    <div class="item"><div><strong>Chips</strong></div><span class="price">£4.00</span></div>
+
+    <div class="item">
+      <div><strong>Fattoush Salad</strong>
+      <small>Croutons, iceberg lettuce, bell pepper, carrot, cucumber mixed with sumac and olive oil.</small></div>
+      <span class="price">£6.50</span>
+    </div>
+
+    <div class="item"><div><strong>Mixed Salad</strong></div><span class="price">£5.99</span></div>
+
+    <div class="item"><div><strong>Raita</strong></div><span class="price">£4.50</span></div>
+
+  </div>
+
+
+  <!-- KIDS -->
+
+  <div class="menu-section">
+
+    <h3>Kids Choices</h3>
+
+    <div class="item">
+      <div><strong>Butter Chicken (D/M/N)</strong><small>Served with rice.</small></div>
+      <span class="price">£10.00</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Korma</strong><small>Served with rice.</small></div>
+      <span class="price">£9.00</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Chicken Nuggets With Chips (G)</strong></div>
+      <span class="price">£7.50</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Crispy Mini Chicken Burger (G)</strong><small>Minced chicken in bread served with chips.</small></div>
+      <span class="price">£8.50</span>
+    </div>
+
+  </div>
+
+
+  <!-- DRINKS -->
+
+  <div id="drinks" class="menu-section">
+
+    <h3>Drinks</h3>
+
+    <div class="item"><div><strong>Strawberry Colado</strong></div><span class="price">£8.30</span></div>
+    <div class="item"><div><strong>Pineapple Colado</strong></div><span class="price">£8.30</span></div>
+    <div class="item"><div><strong>Khans Minty Dynamite</strong></div><span class="price">£8.60</span></div>
+
+    <div class="item">
+      <div><strong>Fresh Juices</strong><small>Orange, Apple, Carrot, Mix Fruit.</small></div>
+      <span class="price">£6.99</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Mojitos</strong><small>Strawberry Mojito, Classic Mint, Passion, Lychee.</small></div>
+      <span class="price">£5.99–£6.25</span>
+    </div>
+
+    <div class="item">
+      <div><strong>Milkshakes</strong><small>Strawberry, Kinder Bueno, Oreo, Biscoff, Snickers, Ferrero Rocher.</small></div>
+      <span class="price">£6.99</span>
+    </div>
+
+    <div class="item"><div><strong>Mango Lassi (D)</strong></div><span class="price">£6.20</span></div>
+    <div class="item"><div><strong>Sweet Lassi (D)</strong></div><span class="price">£6.10</span></div>
+    <div class="item"><div><strong>Salted Lassi (D)</strong></div><span class="price">£6.10</span></div>
+    <div class="item"><div><strong>Faluda (D/N/G)</strong></div><span class="price">£7.50</span></div>
+    <div class="item"><div><strong>Lemon Juice</strong></div><span class="price">£5.99</span></div>
+    <div class="item"><div><strong>Mojito Jug</strong></div><span class="price">£17.75</span></div>
+    <div class="item"><div><strong>Lassi Jug (D)</strong></div><span class="price">£15.99</span></div>
+    <div class="item"><div><strong>Mango Lassi Jug (D)</strong></div><span class="price">£17.75</span></div>
+
+    <div class="item">
+      <div><strong>Soft Drinks</strong>
+      <small>Coke / Coke Zero / Diet Coke, Rubicon Mango, Tango Orange, 7up.</small></div>
+      <span class="price">£2.99</span>
+    </div>
+
+    <div class="item"><div><strong>Sparking Water Small</strong></div><span class="price">£3.00</span></div>
+    <div class="item"><div><strong>Sparking Water Large</strong></div><span class="price">£5.50</span></div>
+    <div class="item"><div><strong>Still Water Small</strong></div><span class="price">£3.00</span></div>
+    <div class="item"><div><strong>Still Water Large</strong></div><span class="price">£5.50</span></div>
+
+  </div>
+
+
+  <div class="section-sub" style="margin-top:35px;font-size:12px;">
+    <strong>Allergy information:</strong>
+    (G) Contains Gluten &nbsp;
+    (D) Contains Dairy &nbsp;
+    (N) Contains Nuts &nbsp;
+    (M) Contains Mustard.
+    <br><br>
+    For spice adjustments or allergy concerns,
+    please speak to our staff, who will gladly assist you.
+    All prices include VAT.
+    Please note we do not accept cheques.
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- INFORMATION -->
+
+<section class="info">
+
+<div class="info-inner">
+
+  <div class="info-grid">
+
+    <div class="info-box">
+
+      <h3>Find Khan’s</h3>
+
+      <p>
+        13–15 Westbourne Grove<br>
+        London, W2 4UA
+      </p>
+
+      <a class="big-link"
+         target="_blank"
+         href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
+        OPEN IN GOOGLE MAPS →
+      </a>
+
+    </div>
+
+
+    <div class="info-box">
+
+      <h3>Contact Khan’s</h3>
+
+      <p>
+        Restaurant<br>
+        <strong>0207 727 5420</strong>
+      </p>
+
+      <a class="big-link"
+         href="tel:02077275420">
+        CALL KHAN’S →
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+
+<!-- SHARE -->
+
+<section class="share-section">
+
+  <h2 class="section-title">
+    Share Khan’s
+  </h2>
+
+  <p class="section-sub">
+    Share the Khan’s Restaurant experience
+    with your friends and family.
+  </p>
+
+  <button class="share-btn" onclick="shareKhan()">
+    📤 SHARE KHAN’S
+  </button>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <strong>
+    KHAN’S RESTAURANT
+  </strong>
+
+  <br>
+
+  Authentic Indian Food • Est. 1977
+
+  <br>
+
+  13–15 Westbourne Grove,
+  London, W2 4UA
+
+  <br><br>
+
+  © 2026 Khan’s Restaurant
+
+</footer>
+
+
+<script>
+
+function shareKhan(){
+
+  if(navigator.share){
+
+    navigator.share({
+      title:"Khan’s Restaurant",
+      text:"Khan’s Restaurant — Authentic Indian Food, Est. 1977",
+      url:window.location.href
+    });
+
+  }else{
+
+    navigator.clipboard.writeText(window.location.href);
+
+    alert("Khan’s Restaurant link copied!");
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
