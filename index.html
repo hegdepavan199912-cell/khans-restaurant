@@ -538,7 +538,7 @@ line-height:1.8;
 color:#70695e
 }
 
-/* QR */
+/* QR DIGITAL MENU */
 
 .qr-section{
 background:
@@ -575,6 +575,243 @@ font-size:13px;
 line-height:1.7;
 color:#999;
 margin-top:10px
+}
+
+/* ================================
+   QR SCANNER
+================================ */
+
+.scanner-modal{
+position:fixed;
+inset:0;
+z-index:10000;
+background:rgba(0,0,0,.9);
+backdrop-filter:blur(14px);
+display:none;
+align-items:center;
+justify-content:center;
+padding:15px;
+}
+
+.scanner-modal.active{
+display:flex;
+}
+
+.scanner-box{
+width:100%;
+max-width:440px;
+background:#11100d;
+border:1px solid rgba(214,173,98,.55);
+box-shadow:
+0 20px 80px rgba(0,0,0,.8),
+0 0 40px rgba(214,173,98,.08);
+padding:22px;
+position:relative;
+animation:scannerIn .3s ease;
+}
+
+@keyframes scannerIn{
+from{
+opacity:0;
+transform:translateY(25px) scale(.96);
+}
+to{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+.scanner-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:17px;
+}
+
+.scanner-header h2{
+font-family:Georgia,serif;
+font-size:26px;
+font-weight:normal;
+color:var(--lightgold);
+}
+
+.scanner-close{
+width:40px;
+height:40px;
+border:1px solid rgba(214,173,98,.5);
+background:#090807;
+color:#fff;
+font-size:23px;
+cursor:pointer;
+transition:.25s;
+}
+
+.scanner-close:hover{
+background:var(--gold);
+color:#090807;
+}
+
+.scanner-camera{
+position:relative;
+width:100%;
+aspect-ratio:1/1;
+background:#000;
+overflow:hidden;
+border:1px solid rgba(214,173,98,.35);
+}
+
+.scanner-camera video{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.scanner-frame{
+position:absolute;
+inset:13%;
+border:1px solid rgba(214,173,98,.45);
+box-shadow:
+0 0 0 999px rgba(0,0,0,.28),
+0 0 25px rgba(214,173,98,.25);
+pointer-events:none;
+}
+
+.scanner-corners{
+position:absolute;
+inset:13%;
+pointer-events:none;
+}
+
+.scanner-corners:before,
+.scanner-corners:after{
+content:"";
+position:absolute;
+width:42px;
+height:42px;
+border-color:#f1d797;
+border-style:solid;
+filter:drop-shadow(0 0 6px rgba(214,173,98,.5));
+}
+
+.scanner-corners:before{
+top:0;
+left:0;
+border-width:3px 0 0 3px;
+}
+
+.scanner-corners:after{
+bottom:0;
+right:0;
+border-width:0 3px 3px 0;
+}
+
+.scanner-line{
+position:absolute;
+left:15%;
+right:15%;
+top:15%;
+height:2px;
+background:linear-gradient(
+90deg,
+transparent,
+var(--lightgold),
+transparent
+);
+box-shadow:0 0 12px var(--gold);
+animation:scanLine 2.2s linear infinite;
+pointer-events:none;
+}
+
+@keyframes scanLine{
+0%{top:15%;opacity:.3}
+50%{opacity:1}
+100%{top:85%;opacity:.3}
+}
+
+.scanner-status{
+text-align:center;
+margin:17px 0 10px;
+font-size:11px;
+letter-spacing:1.2px;
+color:#aaa;
+min-height:16px;
+}
+
+.scanner-status.detected{
+color:#8dffab;
+}
+
+.scanner-result{
+display:none;
+margin-top:12px;
+padding:14px;
+background:#090807;
+border:1px solid rgba(214,173,98,.3);
+}
+
+.scanner-result.show{
+display:block;
+}
+
+.scanner-result-label{
+font-size:9px;
+letter-spacing:2px;
+color:var(--gold);
+margin-bottom:8px;
+}
+
+.scanner-result-text{
+font-size:12px;
+line-height:1.55;
+color:#ddd;
+word-break:break-all;
+max-height:85px;
+overflow:auto;
+}
+
+.scanner-actions{
+display:flex;
+gap:9px;
+margin-top:12px;
+}
+
+.scanner-action{
+flex:1;
+padding:13px 8px;
+border:1px solid var(--gold);
+background:#090807;
+color:var(--lightgold);
+font-size:9px;
+letter-spacing:1px;
+font-weight:bold;
+cursor:pointer;
+transition:.25s;
+}
+
+.scanner-action:hover{
+background:var(--lightgold);
+color:#090807;
+}
+
+.scanner-action.primary{
+background:var(--gold);
+color:#090807;
+}
+
+.scanner-action:disabled{
+opacity:.35;
+cursor:not-allowed;
+background:#090807;
+color:#777;
+}
+
+.scanner-note{
+text-align:center;
+font-size:10px;
+color:#777;
+line-height:1.5;
+margin-top:12px;
 }
 
 /* REVIEWS */
@@ -737,7 +974,8 @@ background:#0c0a08;
 border:1px solid var(--gold);
 color:var(--lightgold);
 font-size:18px;
-box-shadow:0 5px 20px rgba(0,0,0,.4)
+box-shadow:0 5px 20px rgba(0,0,0,.4);
+cursor:pointer
 }
 
 /* TOP */
@@ -827,6 +1065,18 @@ height:320px
 bottom:15px
 }
 
+.scanner-box{
+padding:18px;
+}
+
+.scanner-header h2{
+font-size:22px;
+}
+
+.scanner-action{
+font-size:8px;
+}
+
 }
 
 @media(max-width:400px){
@@ -840,6 +1090,14 @@ letter-spacing:5px
 
 .pre-title{
 letter-spacing:4px
+}
+
+.scanner-modal{
+padding:10px;
+}
+
+.scanner-box{
+padding:15px;
 }
 
 }
@@ -905,12 +1163,20 @@ BAYSWATER • LONDON
 VIEW MENU
 </a>
 
-<a class="btn dark" href="tel:02077275420">
+<button
+class="btn dark"
+onclick="openQRScanner()">
+📷 SCAN A QR CODE
+</button>
+
+<a class="btn dark"
+href="tel:02077275420">
 📞 CALL US
 </a>
 
 <a class="btn dark"
 target="_blank"
+rel="noopener"
 href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
 📍 DIRECTIONS
 </a>
@@ -2130,7 +2396,7 @@ All prices include VAT. Please note we do not accept cheques.
 </section>
 
 
-<!-- QR -->
+<!-- DIGITAL MENU QR -->
 
 <section class="section qr-section">
 
@@ -2220,6 +2486,7 @@ selection for everyone.”
 
 <a class="btn gold"
 target="_blank"
+rel="noopener"
 href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
 ⭐ VIEW GOOGLE REVIEWS
 </a>
@@ -2262,6 +2529,7 @@ London, W2 4UA
 
 <a class="small-btn"
 target="_blank"
+rel="noopener"
 href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
 GET DIRECTIONS →
 </a>
@@ -2335,6 +2603,7 @@ href="tel:02077275420">
 
 <a class="btn dark"
 target="_blank"
+rel="noopener"
 href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
 📍 DIRECTIONS
 </a>
@@ -2342,6 +2611,11 @@ href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4
 <button class="btn dark"
 onclick="shareKhan()">
 📤 SHARE KHAN’S
+</button>
+
+<button class="btn dark"
+onclick="openQRScanner()">
+📷 SCAN QR
 </button>
 
 </div>
@@ -2388,6 +2662,7 @@ title="Call">
 
 <a class="float-btn"
 target="_blank"
+rel="noopener"
 href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu"
 title="Directions">
 📍
@@ -2399,8 +2674,18 @@ title="Menu">
 🍽️
 </a>
 
+<button
+class="float-btn"
+onclick="openQRScanner()"
+title="Scan QR"
+aria-label="Scan QR Code">
+📷
+</button>
+
 </div>
 
+
+<!-- BACK TO TOP -->
 
 <button class="top"
 id="topBtn"
@@ -2409,41 +2694,169 @@ onclick="window.scrollTo({top:0,behavior:'smooth'})">
 </button>
 
 
+<!-- ================================
+     QR SCANNER MODAL
+================================ -->
+
+<div
+class="scanner-modal"
+id="scannerModal"
+aria-hidden="true">
+
+<div
+class="scanner-box"
+role="dialog"
+aria-modal="true"
+aria-labelledby="scannerTitle">
+
+<div class="scanner-header">
+
+<h2 id="scannerTitle">
+Scan QR Code
+</h2>
+
+<button
+class="scanner-close"
+onclick="closeQRScanner()"
+aria-label="Close QR scanner">
+×
+</button>
+
+</div>
+
+
+<div class="scanner-camera">
+
+<video
+id="qrVideo"
+autoplay
+muted
+playsinline>
+</video>
+
+<div class="scanner-frame"></div>
+
+<div class="scanner-corners"></div>
+
+<div class="scanner-line"></div>
+
+</div>
+
+
+<div
+class="scanner-status"
+id="scannerStatus">
+Point your camera at a QR code
+</div>
+
+
+<div
+class="scanner-result"
+id="scannerResult">
+
+<div class="scanner-result-label">
+✓ QR CODE DETECTED
+</div>
+
+<div
+class="scanner-result-text"
+id="scannerResultText">
+</div>
+
+
+<div class="scanner-actions">
+
+<button
+class="scanner-action primary"
+id="openQRButton"
+onclick="openQRResult()"
+disabled>
+OPEN LINK
+</button>
+
+<button
+class="scanner-action"
+onclick="copyQRResult()">
+COPY RESULT
+</button>
+
+</div>
+
+</div>
+
+
+<div class="scanner-actions">
+
+<button
+class="scanner-action"
+onclick="closeQRScanner()">
+CLOSE SCANNER
+</button>
+
+</div>
+
+
+<div class="scanner-note">
+Allow camera access when your browser asks.
+The scanner works on HTTPS websites.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QR SCANNER LIBRARY -->
+
+<script
+src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js">
+</script>
+
+
 <script>
 
-/* LOADER */
+/* ==========================================
+   LOADER
+========================================== */
 
 window.addEventListener("load",function(){
 
 setTimeout(function(){
 
-document.getElementById("loader")
-.classList.add("hide");
+const loader =
+document.getElementById("loader");
+
+if(loader){
+loader.classList.add("hide");
+}
 
 },700);
 
 });
 
 
-/* MENU SEARCH */
+/* ==========================================
+   MENU SEARCH
+========================================== */
 
 function searchMenu(){
 
-const input=
-document.getElementById("menuSearch")
+const input =
+document
+.getElementById("menuSearch")
 .value
 .toLowerCase()
 .trim();
 
-const items=
+const items =
 document.querySelectorAll(".menu-item");
 
 items.forEach(function(item){
 
-const text=
+const text =
 item.innerText.toLowerCase();
 
-item.style.display=
+item.style.display =
 text.includes(input)
 ? "flex"
 : "none";
@@ -2453,11 +2866,14 @@ text.includes(input)
 }
 
 
-/* CATEGORY */
+/* ==========================================
+   CATEGORY
+========================================== */
 
 function goTo(id){
 
-const el=document.getElementById(id);
+const el =
+document.getElementById(id);
 
 if(el){
 
@@ -2471,11 +2887,13 @@ block:"start"
 }
 
 
-/* SHARE */
+/* ==========================================
+   SHARE
+========================================== */
 
 function shareKhan(){
 
-const url=
+const url =
 "https://hegdepavan199912-cell.github.io/khans-restaurant/";
 
 if(navigator.share){
@@ -2488,27 +2906,42 @@ text:"Khan’s Restaurant — Authentic Indian Food, Est. 1977",
 
 url:url
 
+}).catch(function(){});
+
+}else if(navigator.clipboard){
+
+navigator.clipboard
+.writeText(url)
+.then(function(){
+
+alert("Khan’s website link copied!");
+
+})
+.catch(function(){
+
+alert("Khan’s website link: " + url);
+
 });
 
 }else{
 
-navigator.clipboard.writeText(url);
-
-alert("Khan’s website link copied!");
+alert("Khan’s website link: " + url);
 
 }
 
 }
 
 
-/* TOP BUTTON */
+/* ==========================================
+   TOP BUTTON
+========================================== */
 
 window.addEventListener("scroll",function(){
 
-const btn=
+const btn =
 document.getElementById("topBtn");
 
-if(window.scrollY>600){
+if(window.scrollY > 600){
 
 btn.classList.add("show");
 
@@ -2521,14 +2954,713 @@ btn.classList.remove("show");
 });
 
 
-/* VIDEO FALLBACK */
+/* ==========================================
+   VIDEO FALLBACK
+========================================== */
 
-const video=
+const video =
 document.querySelector(".hero-video");
+
+if(video){
 
 video.addEventListener("error",function(){
 
 video.style.display="none";
+
+});
+
+}
+
+
+/* ==========================================
+   QR CODE SCANNER
+========================================== */
+
+let qrStream = null;
+
+let qrAnimation = null;
+
+let qrResult = "";
+
+let qrResultIsLink = false;
+
+let scannerBusy = false;
+
+
+const qrVideo =
+document.getElementById("qrVideo");
+
+const qrCanvas =
+document.createElement("canvas");
+
+const qrContext =
+qrCanvas.getContext("2d",{
+willReadFrequently:true
+});
+
+
+/* OPEN SCANNER */
+
+function openQRScanner(){
+
+const modal =
+document.getElementById(
+"scannerModal"
+);
+
+const status =
+document.getElementById(
+"scannerStatus"
+);
+
+const result =
+document.getElementById(
+"scannerResult"
+);
+
+const resultText =
+document.getElementById(
+"scannerResultText"
+);
+
+const openButton =
+document.getElementById(
+"openQRButton"
+);
+
+
+modal.classList.add("active");
+
+modal.setAttribute(
+"aria-hidden",
+"false"
+);
+
+
+status.textContent =
+"Starting camera…";
+
+status.classList.remove(
+"detected"
+);
+
+
+result.classList.remove(
+"show"
+);
+
+
+resultText.textContent =
+"";
+
+
+openButton.disabled =
+true;
+
+
+qrResult =
+"";
+
+qrResultIsLink =
+false;
+
+scannerBusy =
+false;
+
+
+if(
+typeof jsQR === "undefined"
+){
+
+status.textContent =
+"Scanner library could not be loaded.";
+
+return;
+
+}
+
+
+if(
+!navigator.mediaDevices ||
+!navigator.mediaDevices.getUserMedia
+){
+
+status.textContent =
+"Camera is not supported on this device.";
+
+return;
+
+}
+
+
+navigator.mediaDevices
+.getUserMedia({
+
+video:{
+facingMode:{
+ideal:"environment"
+},
+width:{
+ideal:1280
+},
+height:{
+ideal:1280
+}
+},
+
+audio:false
+
+})
+
+.then(function(stream){
+
+if(
+!document
+.getElementById("scannerModal")
+.classList
+.contains("active")
+){
+
+stream
+.getTracks()
+.forEach(function(track){
+track.stop();
+});
+
+return;
+
+}
+
+
+qrStream =
+stream;
+
+
+qrVideo.srcObject =
+stream;
+
+
+qrVideo.setAttribute(
+"playsinline",
+"true"
+);
+
+
+return qrVideo.play();
+
+})
+
+.then(function(){
+
+status.textContent =
+"Point your camera at a QR code";
+
+scanQRCode();
+
+})
+
+.catch(function(error){
+
+console.error(
+"QR camera error:",
+error
+);
+
+
+if(error.name ===
+"NotAllowedError"){
+
+status.textContent =
+"Camera permission was denied. Please allow camera access.";
+
+}else if(error.name ===
+"NotFoundError"){
+
+status.textContent =
+"No camera was found on this device.";
+
+}else if(error.name ===
+"NotReadableError"){
+
+status.textContent =
+"Camera is currently being used by another app.";
+
+}else{
+
+status.textContent =
+"Unable to start the camera.";
+
+}
+
+});
+
+}
+
+
+/* SCAN */
+
+function scanQRCode(){
+
+if(
+!document
+.getElementById("scannerModal")
+.classList
+.contains("active")
+){
+
+return;
+
+}
+
+
+if(scannerBusy){
+
+return;
+
+}
+
+
+if(
+qrVideo.readyState >=
+qrVideo.HAVE_ENOUGH_DATA
+){
+
+const width =
+qrVideo.videoWidth;
+
+const height =
+qrVideo.videoHeight;
+
+
+if(width && height){
+
+qrCanvas.width =
+width;
+
+qrCanvas.height =
+height;
+
+
+qrContext.drawImage(
+qrVideo,
+0,
+0,
+width,
+height
+);
+
+
+const imageData =
+qrContext.getImageData(
+0,
+0,
+width,
+height
+);
+
+
+const code =
+jsQR(
+imageData.data,
+imageData.width,
+imageData.height,
+{
+inversionAttempts:
+"attemptBoth"
+}
+);
+
+
+if(code && code.data){
+
+handleQRDetected(
+code.data
+);
+
+return;
+
+}
+
+}
+
+}
+
+
+qrAnimation =
+requestAnimationFrame(
+scanQRCode
+);
+
+}
+
+
+/* QR DETECTED */
+
+function handleQRDetected(data){
+
+if(scannerBusy){
+
+return;
+
+}
+
+
+scannerBusy =
+true;
+
+
+qrResult =
+data;
+
+
+const status =
+document.getElementById(
+"scannerStatus"
+);
+
+const result =
+document.getElementById(
+"scannerResult"
+);
+
+const resultText =
+document.getElementById(
+"scannerResultText"
+);
+
+const openButton =
+document.getElementById(
+"openQRButton"
+);
+
+
+status.textContent =
+"✓ QR Code Detected";
+
+status.classList.add(
+"detected"
+);
+
+
+resultText.textContent =
+data;
+
+
+result.classList.add(
+"show"
+);
+
+
+qrResultIsLink =
+isValidURL(data);
+
+
+openButton.disabled =
+!qrResultIsLink;
+
+
+if(qrResultIsLink){
+
+openButton.textContent =
+"OPEN LINK";
+
+}else{
+
+openButton.textContent =
+"NOT A LINK";
+
+}
+
+
+if(navigator.vibrate){
+
+navigator.vibrate(
+[100,50,100]
+);
+
+}
+
+
+stopQRCamera();
+
+}
+
+
+/* CHECK URL */
+
+function isValidURL(value){
+
+try{
+
+const url =
+new URL(value);
+
+
+return(
+url.protocol ===
+"http:" ||
+url.protocol ===
+"https:"
+);
+
+}catch(error){
+
+return false;
+
+}
+
+}
+
+
+/* OPEN RESULT */
+
+function openQRResult(){
+
+if(
+!qrResult ||
+!qrResultIsLink
+){
+
+return;
+
+}
+
+
+window.open(
+qrResult,
+"_blank",
+"noopener,noreferrer"
+);
+
+}
+
+
+/* COPY RESULT */
+
+async function copyQRResult(){
+
+if(!qrResult){
+
+return;
+
+}
+
+
+try{
+
+if(
+navigator.clipboard &&
+navigator.clipboard.writeText
+){
+
+await navigator.clipboard.writeText(
+qrResult
+);
+
+}else{
+
+throw new Error(
+"Clipboard unavailable"
+);
+
+}
+
+
+const status =
+document.getElementById(
+"scannerStatus"
+);
+
+status.textContent =
+"✓ Result copied to clipboard";
+
+status.classList.add(
+"detected"
+);
+
+
+}catch(error){
+
+const textArea =
+document.createElement(
+"textarea"
+);
+
+
+textArea.value =
+qrResult;
+
+
+textArea.style.position =
+"fixed";
+
+textArea.style.left =
+"-9999px";
+
+
+document.body.appendChild(
+textArea
+);
+
+
+textArea.select();
+
+
+try{
+
+document.execCommand(
+"copy"
+);
+
+alert(
+"QR result copied!"
+);
+
+}catch(e){
+
+alert(
+"Unable to copy automatically. Please select the result manually."
+);
+
+}
+
+
+textArea.remove();
+
+}
+
+}
+
+
+/* STOP CAMERA */
+
+function stopQRCamera(){
+
+if(qrAnimation){
+
+cancelAnimationFrame(
+qrAnimation
+);
+
+qrAnimation =
+null;
+
+}
+
+
+if(qrStream){
+
+qrStream
+.getTracks()
+.forEach(function(track){
+
+track.stop();
+
+});
+
+qrStream =
+null;
+
+}
+
+
+if(qrVideo){
+
+qrVideo.srcObject =
+null;
+
+}
+
+}
+
+
+/* CLOSE SCANNER */
+
+function closeQRScanner(){
+
+stopQRCamera();
+
+
+const modal =
+document.getElementById(
+"scannerModal"
+);
+
+
+modal.classList.remove(
+"active"
+);
+
+
+modal.setAttribute(
+"aria-hidden",
+"true"
+);
+
+
+scannerBusy =
+false;
+
+}
+
+
+/* CLICK OUTSIDE TO CLOSE */
+
+document
+.getElementById("scannerModal")
+.addEventListener(
+"click",
+function(event){
+
+if(event.target === this){
+
+closeQRScanner();
+
+}
+
+});
+
+
+/* ESCAPE KEY */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(event.key === "Escape"){
+
+const modal =
+document.getElementById(
+"scannerModal"
+);
+
+if(
+modal.classList
+.contains("active")
+){
+
+closeQRScanner();
+
+}
+
+}
+
+});
+
+
+/* STOP CAMERA WHEN PAGE IS HIDDEN */
+
+document.addEventListener(
+"visibilitychange",
+function(){
+
+if(
+document.hidden
+){
+
+stopQRCamera();
+
+}
 
 });
 
