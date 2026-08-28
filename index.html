@@ -2,4563 +2,691 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090807">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
 
-<title>Khans Restaurant | Bayswater London</title>
+<title>Khan's Restaurant | Table Booking</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-html{scroll-behavior:smooth}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 body{
-font-family:Arial,Helvetica,sans-serif;
-background:#090807;
-color:#fff;
-overflow-x:hidden
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#f4f1eb;
+    color:#171717;
 }
 
-:root{
---gold:#d6ad62;
---lightgold:#f1d797;
---cream:#f5efe4;
---dark:#090807;
---dark2:#15120e
-}
-
-a{text-decoration:none;color:inherit}
-button,input,select{font-family:inherit}
-
-/* LOADER */
-
-.loader{
-position:fixed;
-inset:0;
-z-index:9999;
-background:#090807;
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-transition:.7s
-}
-
-.loader.hide{
-opacity:0;
-visibility:hidden
-}
-
-.loader-logo{
-font-family:Georgia,serif;
-font-size:40px;
-letter-spacing:6px;
-color:var(--lightgold)
-}
-
-.loader-line{
-width:100px;
-height:1px;
-background:var(--gold);
-margin-top:20px;
-animation:load 1.3s infinite
-}
-
-@keyframes load{
-0%{transform:scaleX(0)}
-50%{transform:scaleX(1)}
-100%{transform:scaleX(0)}
-}
-
-/* HERO */
-
-.hero{
-height:100svh;
-min-height:650px;
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-overflow:hidden
-}
-
-.hero-video,
-.hero-image{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-object-fit:cover
-}
-
-.hero-image{
-z-index:-2;
-filter:brightness(.48)
-}
-
-.hero-video{
-z-index:-1
-}
-
-.hero:after{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(
-to bottom,
-rgba(0,0,0,.3),
-rgba(0,0,0,.58) 55%,
-rgba(0,0,0,.95)
-);
-z-index:0
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-width:92%;
-max-width:950px;
-animation:heroIn 1.2s ease
-}
-
-@keyframes heroIn{
-from{opacity:0;transform:translateY(30px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-.pre-title{
-font-size:10px;
-letter-spacing:7px;
-color:var(--lightgold);
-margin-bottom:25px
+.header{
+    background:#111;
+    color:white;
+    padding:22px 18px;
+    text-align:center;
 }
 
 .logo{
-font-family:Georgia,serif;
-font-size:clamp(65px,14vw,125px);
-font-weight:normal;
-letter-spacing:5px;
-line-height:.85;
-text-shadow:0 5px 30px #000
+    font-size:28px;
+    font-weight:800;
+    letter-spacing:.3px;
 }
 
-.restaurant{
-font-family:Georgia,serif;
-font-size:clamp(18px,4vw,30px);
-letter-spacing:12px;
-margin-top:18px
+.subtitle{
+    margin-top:5px;
+    color:#c9a45c;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
 }
 
-.line{
-height:1px;
-width:75px;
-background:var(--gold);
-margin:27px auto
+.hero{
+    background:
+      linear-gradient(rgba(0,0,0,.63),rgba(0,0,0,.68)),
+      url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=85");
+    background-size:cover;
+    background-position:center;
+    min-height:260px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+    padding:40px 20px;
 }
 
-.tagline{
-font-family:Georgia,serif;
-font-style:italic;
-font-size:18px
+.hero h1{
+    font-size:38px;
+    margin-bottom:10px;
 }
 
-.est{
-font-size:10px;
-letter-spacing:4px;
-color:#bbb;
-margin-top:10px
-}
-
-.hero-buttons{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:12px;
-margin-top:35px
-}
-
-.btn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:15px 23px;
-border:1px solid rgba(214,173,98,.7);
-font-size:10px;
-letter-spacing:1.8px;
-font-weight:bold;
-transition:.3s;
-cursor:pointer
-}
-
-.btn.gold{
-background:var(--gold);
-color:#080706;
-border-color:var(--gold)
-}
-
-.btn.dark{
-background:rgba(0,0,0,.35);
-backdrop-filter:blur(10px)
-}
-
-.btn:hover{
-transform:translateY(-3px);
-background:var(--lightgold);
-color:#080706
-}
-
-.scroll{
-position:absolute;
-z-index:3;
-bottom:25px;
-font-size:9px;
-letter-spacing:4px;
-color:#bbb
-}
-
-/* NAV */
-
-.nav{
-height:64px;
-position:sticky;
-top:0;
-z-index:500;
-background:rgba(9,8,7,.95);
-backdrop-filter:blur(16px);
-border-bottom:1px solid rgba(214,173,98,.18)
-}
-
-.nav-inner{
-width:94%;
-max-width:1100px;
-height:100%;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:space-between
-}
-
-.nav-brand{
-font-family:Georgia,serif;
-font-size:21px;
-letter-spacing:2px;
-color:var(--lightgold)
-}
-
-.nav-links{
-display:flex;
-gap:25px;
-font-size:10px;
-letter-spacing:1.5px;
-color:#ccc
-}
-
-.nav-links a:hover{color:var(--lightgold)}
-
-.nav-phone{
-border:1px solid var(--gold);
-padding:9px 13px;
-font-size:10px;
-color:var(--lightgold)
-}
-
-/* GENERAL */
-
-.section{
-padding:90px 20px
+.hero p{
+    font-size:16px;
+    opacity:.92;
 }
 
 .container{
-width:100%;
-max-width:1100px;
-margin:auto
+    width:min(680px,92%);
+    margin:-45px auto 50px;
+    position:relative;
 }
 
-.kicker{
-text-align:center;
-font-size:10px;
-letter-spacing:5px;
-color:var(--gold);
-margin-bottom:14px
+.booking-card{
+    background:white;
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 18px 55px rgba(0,0,0,.13);
 }
 
-.title{
-font-family:Georgia,serif;
-font-size:clamp(35px,6vw,55px);
-font-weight:normal;
-text-align:center
+.booking-title{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.description{
-max-width:730px;
-margin:0 auto;
-text-align:center;
-font-size:14px;
-line-height:1.9;
-color:#999
+.booking-title h2{
+    font-size:26px;
+    margin-bottom:7px;
 }
 
-/* ABOUT */
-
-.about{
-background:#0d0b09
-}
-
-/* EXPERIENCE */
-
-.experience{
-background:
-linear-gradient(rgba(10,8,6,.95),rgba(10,8,6,.95)),
-url("restaurant.jpg") center/cover
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:20px;
-margin-top:50px
-}
-
-.card{
-padding:38px 24px;
-background:rgba(255,255,255,.035);
-border:1px solid rgba(214,173,98,.16);
-text-align:center;
-transition:.3s
-}
-
-.card:hover{
-transform:translateY(-6px);
-border-color:rgba(214,173,98,.65)
-}
-
-.icon{
-font-size:30px;
-margin-bottom:18px
-}
-
-.card h3{
-font-family:Georgia,serif;
-font-size:24px;
-font-weight:normal;
-margin-bottom:12px
-}
-
-.card p{
-font-size:13px;
-line-height:1.7;
-color:#999
-}
-
-/* SPECIALITIES */
-
-.specialities{
-background:#11100d
-}
-
-.food-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-margin-top:50px
-}
-
-.food{
-height:370px;
-position:relative;
-overflow:hidden;
-background:#1b1712;
-border:1px solid rgba(214,173,98,.15)
-}
-
-.food img{
-width:100%;
-height:100%;
-object-fit:cover;
-transition:.6s
-}
-
-.food:hover img{
-transform:scale(1.08)
-}
-
-.food-overlay{
-position:absolute;
-inset:0;
-display:flex;
-align-items:flex-end;
-padding:25px;
-background:linear-gradient(transparent 35%,rgba(0,0,0,.92))
-}
-
-.food-name{
-font-family:Georgia,serif;
-font-size:23px
-}
-
-.food-price{
-color:var(--lightgold);
-font-size:13px;
-margin-top:7px
-}
-
-/* GALLERY */
-
-.gallery{
-background:#0b0907
-}
-
-.gallery-grid{
-display:grid;
-grid-template-columns:2fr 1fr 1fr;
-grid-auto-rows:210px;
-gap:10px;
-margin-top:45px
-}
-
-.gallery-grid img{
-width:100%;
-height:100%;
-object-fit:cover;
-filter:brightness(.82);
-transition:.4s
-}
-
-.gallery-grid img:hover{
-filter:brightness(1);
-transform:scale(1.02)
-}
-
-.gallery-large{
-grid-row:span 2
-}
-
-/* MENU */
-
-.menu{
-background:var(--cream);
-color:#15120e
-}
-
-.menu .title{color:#15120e}
-
-.menu .description{color:#70695e}
-
-.search{
-max-width:620px;
-margin:35px auto 15px
-}
-
-.search input{
-width:100%;
-padding:16px 19px;
-border:1px solid #d2c7b5;
-outline:none;
-background:#fff;
-font-size:14px
-}
-
-.categories{
-display:flex;
-gap:8px;
-overflow-x:auto;
-padding:15px 0 35px;
-justify-content:center
-}
-
-.category{
-white-space:nowrap;
-padding:10px 15px;
-border:1px solid #cec2af;
-background:#fff;
-font-size:10px;
-letter-spacing:1px;
-cursor:pointer
-}
-
-.category.active,
-.category:hover{
-background:#17130e;
-color:#fff
-}
-
-.menu-section{
-max-width:1000px;
-margin:45px auto
-}
-
-.menu-section h3{
-font-family:Georgia,serif;
-font-size:32px;
-font-weight:normal;
-padding-bottom:12px;
-border-bottom:1px solid #d5c9b7;
-margin-bottom:4px
-}
-
-.menu-item{
-display:flex;
-justify-content:space-between;
-gap:20px;
-padding:16px 0;
-border-bottom:1px solid #e2d9ca
-}
-
-.menu-info{
-max-width:800px
-}
-
-.menu-name{
-font-size:14px;
-font-weight:bold
-}
-
-.menu-desc{
-font-size:12px;
-line-height:1.6;
-color:#777;
-margin-top:5px
-}
-
-.menu-price{
-font-size:14px;
-font-weight:bold;
-white-space:nowrap
-}
-
-.allergy{
-max-width:900px;
-margin:50px auto 0;
-text-align:center;
-font-size:11px;
-line-height:1.8;
-color:#70695e
-}
-
-/* ==========================================
-   PROFESSIONAL TABLE BOOKING
-========================================== */
-
-.booking{
-background:
-radial-gradient(circle at top,#241d14 0,#0a0806 58%);
-color:#fff;
-position:relative;
-overflow:hidden
-}
-
-.booking-wrapper{
-max-width:1050px;
-margin:45px auto 0;
-background:rgba(255,255,255,.025);
-border:1px solid rgba(214,173,98,.25);
-padding:35px;
-box-shadow:0 25px 80px rgba(0,0,0,.35)
-}
-
-.booking-intro{
-text-align:center;
-max-width:650px;
-margin:0 auto 35px;
-color:#999;
-font-size:13px;
-line-height:1.8
-}
-
-.booking-fields{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:18px;
-margin-bottom:35px
-}
-
-.booking-field label{
-display:block;
-font-size:9px;
-letter-spacing:2px;
-color:var(--lightgold);
-margin-bottom:9px
-}
-
-.booking-field input,
-.booking-field select{
-width:100%;
-height:50px;
-padding:0 15px;
-border:1px solid rgba(214,173,98,.3);
-background:#090807;
-color:#fff;
-outline:none;
-font-size:13px
-}
-
-.booking-field input:focus,
-.booking-field select:focus{
-border-color:var(--gold);
-box-shadow:0 0 0 2px rgba(214,173,98,.08)
-}
-
-.booking-field input::-webkit-calendar-picker-indicator{
-filter:invert(1);
-opacity:.7
-}
-
-.booking-step{
-font-size:10px;
-letter-spacing:3px;
-color:var(--gold);
-margin-bottom:15px;
-text-align:center
-}
-
-.table-layout{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:14px;
-margin-top:20px
-}
-
-.table-card{
-position:relative;
-min-height:135px;
-padding:18px 10px;
-border:1px solid rgba(214,173,98,.25);
-background:rgba(255,255,255,.025);
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-cursor:pointer;
-transition:.25s;
-text-align:center
-}
-
-.table-card:hover{
-transform:translateY(-3px);
-border-color:var(--gold);
-background:rgba(214,173,98,.07)
-}
-
-.table-card.selected{
-border:2px solid var(--gold);
-background:rgba(214,173,98,.12);
-box-shadow:0 0 25px rgba(214,173,98,.12)
-}
-
-.table-card.selected:after{
-content:"✓";
-position:absolute;
-top:7px;
-right:9px;
-color:var(--lightgold);
-font-weight:bold;
-font-size:16px
-}
-
-.table-icon{
-font-size:30px;
-margin-bottom:7px
-}
-
-.table-number{
-font-family:Georgia,serif;
-font-size:19px;
-color:#fff
-}
-
-.table-capacity{
-font-size:10px;
-color:#999;
-margin-top:6px;
-letter-spacing:.5px
-}
-
-.table-status{
-font-size:8px;
-letter-spacing:1.5px;
-color:#78d88a;
-margin-top:8px
-}
-
-.booking-selected{
-display:none;
-margin:22px 0;
-padding:15px;
-border:1px solid rgba(214,173,98,.4);
-background:rgba(214,173,98,.06);
-text-align:center;
-font-size:12px;
-color:#ddd
-}
-
-.booking-selected.show{
-display:block
-}
-
-.booking-selected strong{
-color:var(--lightgold)
-}
-
-.booking-submit{
-width:100%;
-margin-top:25px;
-height:56px;
-border:1px solid var(--gold);
-background:var(--gold);
-color:#090807;
-font-size:11px;
-letter-spacing:2px;
-font-weight:bold;
-cursor:pointer;
-transition:.25s
-}
-
-.booking-submit:hover{
-background:var(--lightgold);
-transform:translateY(-2px)
-}
-
-.booking-note{
-text-align:center;
-color:#666;
-font-size:10px;
-line-height:1.6;
-margin-top:14px
-}
-
-.booking-success{
-display:none;
-margin-top:18px;
-padding:15px;
-border:1px solid #568b61;
-background:rgba(80,150,95,.08);
-color:#9ee3aa;
-text-align:center;
-font-size:11px;
-line-height:1.6
-}
-
-/* QR DIGITAL MENU */
-
-.qr-section{
-background:
-radial-gradient(circle at center,#241d14 0,#090807 60%);
-text-align:center
-}
-
-.qr-box{
-max-width:650px;
-margin:40px auto 0;
-padding:45px 25px;
-border:1px solid rgba(214,173,98,.35);
-background:rgba(255,255,255,.025)
-}
-
-.qr-image{
-width:200px;
-height:200px;
-object-fit:contain;
-background:#fff;
-padding:10px;
-margin:0 auto 25px;
-display:block
-}
-
-.qr-title{
-font-family:Georgia,serif;
-font-size:28px;
-color:var(--lightgold)
-}
-
-.qr-text{
-font-size:13px;
-line-height:1.7;
-color:#999;
-margin-top:10px
-}
-
-/* ================================
-   QR SCANNER
-================================ */
-
-.scanner-modal{
-position:fixed;
-inset:0;
-z-index:10000;
-background:rgba(0,0,0,.9);
-backdrop-filter:blur(14px);
-display:none;
-align-items:center;
-justify-content:center;
-padding:15px;
-}
-
-.scanner-modal.active{
-display:flex;
-}
-
-.scanner-box{
-width:100%;
-max-width:440px;
-background:#11100d;
-border:1px solid rgba(214,173,98,.55);
-box-shadow:
-0 20px 80px rgba(0,0,0,.8),
-0 0 40px rgba(214,173,98,.08);
-padding:22px;
-position:relative;
-animation:scannerIn .3s ease;
-}
-
-@keyframes scannerIn{
-from{
-opacity:0;
-transform:translateY(25px) scale(.96);
-}
-to{
-opacity:1;
-transform:translateY(0) scale(1);
-}
-}
-
-.scanner-header{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-bottom:17px;
-}
-
-.scanner-header h2{
-font-family:Georgia,serif;
-font-size:26px;
-font-weight:normal;
-color:var(--lightgold);
-}
-
-.scanner-close{
-width:40px;
-height:40px;
-border:1px solid rgba(214,173,98,.5);
-background:#090807;
-color:#fff;
-font-size:23px;
-cursor:pointer;
-transition:.25s;
-}
-
-.scanner-close:hover{
-background:var(--gold);
-color:#090807;
-}
-
-.scanner-camera{
-position:relative;
-width:100%;
-aspect-ratio:1/1;
-background:#000;
-overflow:hidden;
-border:1px solid rgba(214,173,98,.35);
-}
-
-.scanner-camera video{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
-
-.scanner-frame{
-position:absolute;
-inset:13%;
-border:1px solid rgba(214,173,98,.45);
-box-shadow:
-0 0 0 999px rgba(0,0,0,.28),
-0 0 25px rgba(214,173,98,.25);
-pointer-events:none;
-}
-
-.scanner-corners{
-position:absolute;
-inset:13%;
-pointer-events:none;
-}
-
-.scanner-corners:before,
-.scanner-corners:after{
-content:"";
-position:absolute;
-width:42px;
-height:42px;
-border-color:#f1d797;
-border-style:solid;
-filter:drop-shadow(0 0 6px rgba(214,173,98,.5));
-}
-
-.scanner-corners:before{
-top:0;
-left:0;
-border-width:3px 0 0 3px;
-}
-
-.scanner-corners:after{
-bottom:0;
-right:0;
-border-width:0 3px 3px 0;
-}
-
-.scanner-line{
-position:absolute;
-left:15%;
-right:15%;
-top:15%;
-height:2px;
-background:linear-gradient(
-90deg,
-transparent,
-var(--lightgold),
-transparent
-);
-box-shadow:0 0 12px var(--gold);
-animation:scanLine 2.2s linear infinite;
-pointer-events:none;
-}
-
-@keyframes scanLine{
-0%{top:15%;opacity:.3}
-50%{opacity:1}
-100%{top:85%;opacity:.3}
-}
-
-.scanner-status{
-text-align:center;
-margin:17px 0 10px;
-font-size:11px;
-letter-spacing:1.2px;
-color:#aaa;
-min-height:16px;
-}
-
-.scanner-status.detected{
-color:#8dffab;
-}
-
-.scanner-result{
-display:none;
-margin-top:12px;
-padding:14px;
-background:#090807;
-border:1px solid rgba(214,173,98,.3);
-}
-
-.scanner-result.show{
-display:block;
-}
-
-.scanner-result-label{
-font-size:9px;
-letter-spacing:2px;
-color:var(--gold);
-margin-bottom:8px;
-}
-
-.scanner-result-text{
-font-size:12px;
-line-height:1.55;
-color:#ddd;
-word-break:break-all;
-max-height:85px;
-overflow:auto;
-}
-
-.scanner-actions{
-display:flex;
-gap:9px;
-margin-top:12px;
-}
-
-.scanner-action{
-flex:1;
-padding:13px 8px;
-border:1px solid var(--gold);
-background:#090807;
-color:var(--lightgold);
-font-size:9px;
-letter-spacing:1px;
-font-weight:bold;
-cursor:pointer;
-transition:.25s;
-}
-
-.scanner-action:hover{
-background:var(--lightgold);
-color:#090807;
-}
-
-.scanner-action.primary{
-background:var(--gold);
-color:#090807;
-}
-
-.scanner-action:disabled{
-opacity:.35;
-cursor:not-allowed;
-background:#090807;
-color:#777;
-}
-
-.scanner-note{
-text-align:center;
-font-size:10px;
-color:#777;
-line-height:1.5;
-margin-top:12px;
-}
-
-/* REVIEWS */
-
-.reviews{
-background:#f1ebe0;
-color:#17130e
-}
-
-.review-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-margin-top:45px
-}
-
-.review{
-background:#fff;
-padding:30px 23px;
-text-align:center;
-border:1px solid #e0d5c4
-}
-
-.stars{
-letter-spacing:4px;
-color:#b18843;
-font-size:17px;
-margin-bottom:15px
-}
-
-.review p{
-font-family:Georgia,serif;
-font-style:italic;
-line-height:1.7;
-font-size:14px;
-color:#555
-}
-
-.review-name{
-font-size:10px;
-letter-spacing:2px;
-margin-top:17px;
-color:#777
-}
-
-/* CONTACT */
-
-.contact{
-background:#0f0d0a
-}
-
-.contact-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:18px;
-margin-top:50px
-}
-
-.contact-card{
-padding:32px 20px;
-text-align:center;
-border:1px solid rgba(214,173,98,.16)
-}
-
-.contact-card h3{
-font-family:Georgia,serif;
-font-weight:normal;
-font-size:21px;
-margin:12px 0
-}
-
-.contact-card p{
-font-size:12px;
-line-height:1.7;
-color:#999
-}
-
-.small-btn{
-display:inline-block;
-margin-top:16px;
-padding:11px 15px;
-border:1px solid var(--gold);
-font-size:10px;
-letter-spacing:1px;
-color:var(--lightgold)
-}
-
-/* FINAL CTA */
-
-.cta{
-background:#17130f;
-text-align:center
-}
-
-.action-buttons{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:12px;
-margin-top:30px
-}
-
-/* FOOTER */
-
-footer{
-background:#070605;
-padding:55px 20px 25px;
-text-align:center
-}
-
-.footer-logo{
-font-family:Georgia,serif;
-font-size:33px;
-letter-spacing:3px;
-color:var(--lightgold)
-}
-
-.footer-tag{
-font-size:10px;
-letter-spacing:3px;
-color:#777;
-margin-top:12px
-}
-
-.footer-address{
-font-size:12px;
-line-height:1.8;
-color:#777;
-margin-top:20px
-}
-
-.copyright{
-border-top:1px solid #211e19;
-margin-top:35px;
-padding-top:20px;
-font-size:10px;
-color:#555
-}
-
-/* FLOATING */
-
-.floating{
-position:fixed;
-right:15px;
-bottom:15px;
-z-index:600;
-display:flex;
-flex-direction:column;
-gap:8px
-}
-
-.float-btn{
-width:48px;
-height:48px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:#0c0a08;
-border:1px solid var(--gold);
-color:var(--lightgold);
-font-size:18px;
-box-shadow:0 5px 20px rgba(0,0,0,.4);
-cursor:pointer
-}
-
-/* TOP */
-
-.top{
-position:fixed;
-right:18px;
-bottom:190px;
-width:42px;
-height:42px;
-z-index:590;
-border:1px solid var(--gold);
-background:#0c0a08;
-color:var(--lightgold);
-opacity:0;
-visibility:hidden;
-cursor:pointer
-}
-
-.top.show{
-opacity:1;
-visibility:visible
-}
-
-/* MOBILE */
-
-@media(max-width:800px){
-
-.nav-links{display:none}
-
-.nav-phone{
-font-size:9px;
-padding:8px 10px
-}
-
-.cards,
-.food-grid,
-.review-grid,
-.contact-grid{
-grid-template-columns:1fr
-}
-
-.gallery-grid{
-grid-template-columns:1fr 1fr;
-grid-auto-rows:180px
-}
-
-.gallery-large{
-grid-column:span 2;
-grid-row:span 1
-}
-
-.section{
-padding:70px 17px
-}
-
-.hero-buttons{
-flex-direction:column;
-align-items:center
-}
-
-.hero-buttons .btn{
-width:280px
+.booking-title p{
+    color:#777;
+    font-size:14px;
 }
 
-.restaurant{
-letter-spacing:7px
+.form-group{
+    margin-bottom:19px;
 }
 
-.categories{
-justify-content:flex-start
+label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:8px;
+    color:#333;
 }
 
-.menu-section h3{
-font-size:27px
+input,select{
+    width:100%;
+    border:1px solid #ddd;
+    background:#fafafa;
+    padding:15px;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+    transition:.2s;
 }
 
-.menu-item{
-padding:14px 0
+input:focus,select:focus{
+    border-color:#b78a3b;
+    background:white;
+    box-shadow:0 0 0 3px rgba(183,138,59,.12);
 }
 
-.food{
-height:320px
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
 }
 
-.floating{
-bottom:15px
+.people-selector{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:8px;
 }
 
-.scanner-box{
-padding:18px;
+.people-selector button{
+    border:1px solid #ddd;
+    background:#fafafa;
+    border-radius:10px;
+    padding:12px 5px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
 }
 
-.scanner-header h2{
-font-size:22px;
+.people-selector button.active{
+    background:#111;
+    color:white;
+    border-color:#111;
 }
 
-.scanner-action{
-font-size:8px;
+.booking-btn{
+    width:100%;
+    border:0;
+    background:linear-gradient(135deg,#b78a3b,#d2ad68);
+    color:white;
+    padding:17px;
+    border-radius:13px;
+    font-size:17px;
+    font-weight:800;
+    cursor:pointer;
+    margin-top:7px;
+    box-shadow:0 8px 20px rgba(183,138,59,.25);
 }
-
-/* BOOKING MOBILE */
 
-.booking-wrapper{
-padding:20px 15px
+.booking-btn:active{
+    transform:scale(.98);
 }
 
-.booking-fields{
-grid-template-columns:1fr;
-gap:14px
+.info-box{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    background:#f8f5ee;
+    border:1px solid #eee4d0;
+    border-radius:14px;
+    padding:15px;
+    margin-top:20px;
 }
 
-.table-layout{
-grid-template-columns:repeat(2,1fr);
-gap:10px
+.info-icon{
+    font-size:24px;
 }
 
-.table-card{
-min-height:125px
+.info-box strong{
+    font-size:14px;
 }
 
+.info-box p{
+    color:#777;
+    font-size:12px;
+    margin-top:3px;
 }
 
-@media(max-width:400px){
-
-.logo{font-size:58px}
-
-.restaurant{
-font-size:15px;
-letter-spacing:5px
+.footer{
+    text-align:center;
+    padding:30px 20px;
+    color:#777;
+    font-size:13px;
 }
 
-.pre-title{
-letter-spacing:4px
+.footer strong{
+    color:#222;
 }
 
-.scanner-modal{
-padding:10px;
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:999;
 }
 
-.scanner-box{
-padding:15px;
+.modal.show{
+    display:flex;
 }
 
-.table-number{
-font-size:17px
-}
+.modal-card{
+    width:min(460px,100%);
+    background:white;
+    border-radius:24px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 25px 70px rgba(0,0,0,.3);
+    animation:popup .2s ease;
+}
 
+@keyframes popup{
+    from{
+        transform:scale(.92);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.success{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:#111;
+    color:#d2ad68;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    margin:0 auto 18px;
+}
+
+.modal-card h2{
+    margin-bottom:8px;
+}
+
+.modal-card p{
+    color:#666;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.booking-summary{
+    background:#f7f5f1;
+    border-radius:15px;
+    margin:20px 0;
+    padding:16px;
+    text-align:left;
+    line-height:1.9;
+    font-size:14px;
+}
+
+.whatsapp-btn{
+    width:100%;
+    background:#25D366;
+    color:white;
+    border:0;
+    padding:15px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:800;
+    cursor:pointer;
+    margin-top:5px;
+}
+
+.close-btn{
+    width:100%;
+    background:#111;
+    color:white;
+    border:0;
+    padding:14px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+@media(max-width:520px){
+
+    .hero{
+        min-height:230px;
+    }
+
+    .hero h1{
+        font-size:30px;
+    }
+
+    .container{
+        width:94%;
+        margin-top:-35px;
+    }
+
+    .booking-card{
+        padding:22px 18px;
+        border-radius:20px;
+    }
+
+    .row{
+        grid-template-columns:1fr;
+        gap:0;
+    }
+
+    .people-selector{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .logo{
+        font-size:24px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-
-<div class="loader" id="loader">
-<div class="loader-logo">KHANS</div>
-<div class="loader-line"></div>
-</div>
-
-
-<!-- HERO -->
-
-<header class="hero" id="home">
-
-<img class="hero-image"
-src="hero.jpg"
-alt="Khans Restaurant">
-
-<video class="hero-video"
-autoplay
-muted
-loop
-playsinline
-poster="hero.jpg">
-
-<source src="hero.mp4" type="video/mp4">
-
-</video>
-
-<div class="hero-content">
-
-<div class="pre-title">
-AUTHENTIC INDIAN CUISINE
-</div>
-
-<div class="logo">
-KHANS
-</div>
-
-<div class="restaurant">
-RESTAURANT
-</div>
-
-<div class="line"></div>
-
-<div class="tagline">
-A Taste of Tradition Since 1977
-</div>
-
-<div class="est">
-BAYSWATER • LONDON
-</div>
-
-<div class="hero-buttons">
-
-<a class="btn gold" href="#menu">
-VIEW MENU
-</a>
-
-<a class="btn gold" href="#booking">
-🪑 BOOK A TABLE
-</a>
-
-<button
-class="btn dark"
-onclick="openQRScanner()">
-📷 SCAN A QR CODE
-</button>
-
-<a class="btn dark"
-href="tel:02077275420">
-📞 CALL US
-</a>
-
-<a class="btn dark"
-target="_blank"
-rel="noopener"
-href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
-📍 DIRECTIONS
-</a>
-
-</div>
-
-</div>
-
-<div class="scroll">
-SCROLL TO EXPLORE ↓
-</div>
-
+<header class="header">
+    <div class="logo">Khan's Restaurant 🍽️</div>
+    <div class="subtitle">Authentic Indian Dining</div>
 </header>
 
-
-<!-- NAV -->
-
-<nav class="nav">
-
-<div class="nav-inner">
-
-<a class="nav-brand" href="#home">
-KHANS
-</a>
-
-<div class="nav-links">
-<a href="#about">ABOUT</a>
-<a href="#specialities">SPECIALITIES</a>
-<a href="#menu">MENU</a>
-<a href="#booking">BOOK TABLE</a>
-<a href="#gallery">GALLERY</a>
-<a href="#contact">CONTACT</a>
-</div>
-
-<a class="nav-phone"
-href="tel:02077275420">
-0207 727 5420
-</a>
-
-</div>
-
-</nav>
-
-
-<!-- ABOUT -->
-
-<section class="section about" id="about">
-
-<div class="container">
-
-<div class="kicker">
-WELCOME TO KHANS
-</div>
-
-<h2 class="title">
-A London Tradition
-</h2>
-
-<div class="line"></div>
-
-<p class="description">
-Experience authentic Indian cuisine at Khans Restaurant,
-where traditional flavours, aromatic spices and carefully
-prepared dishes come together. Established in 1977,
-Khans brings generations of Indian culinary tradition
-to Bayswater, London.
-</p>
-
-</div>
-
+<section class="hero">
+    <div>
+        <h1>Reserve Your Table</h1>
+        <p>Enjoy an unforgettable dining experience with us.</p>
+    </div>
 </section>
 
+<main class="container">
+
+    <div class="booking-card">
+
+        <div class="booking-title">
+            <h2>Table Booking</h2>
+            <p>Please complete the details below</p>
+        </div>
+
+        <form id="bookingForm">
+
+            <div class="form-group">
+                <label>FULL NAME</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+            <div class="row">
+
+                <div class="form-group">
+                    <label>PHONE NUMBER</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter phone number"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>EMAIL ADDRESS</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter email"
+                    >
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="form-group">
+                    <label>DATE</label>
+                    <input
+                        type="date"
+                        id="date"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>TIME</label>
+                    <select id="time" required>
+                        <option value="">Select time</option>
+                        <option>12:00 PM</option>
+                        <option>12:30 PM</option>
+                        <option>1:00 PM</option>
+                        <option>1:30 PM</option>
+                        <option>2:00 PM</option>
+                        <option>2:30 PM</option>
+                        <option>5:00 PM</option>
+                        <option>5:30 PM</option>
+                        <option>6:00 PM</option>
+                        <option>6:30 PM</option>
+                        <option>7:00 PM</option>
+                        <option>7:30 PM</option>
+                        <option>8:00 PM</option>
+                        <option>8:30 PM</option>
+                        <option>9:00 PM</option>
+                        <option>9:30 PM</option>
+                        <option>10:00 PM</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>NUMBER OF GUESTS</label>
+
+                <div class="people-selector">
+
+                    <button type="button" data-value="1">1</button>
+                    <button type="button" data-value="2" class="active">2</button>
+                    <button type="button" data-value="3">3</button>
+                    <button type="button" data-value="4">4</button>
+                    <button type="button" data-value="5">5</button>
+                    <button type="button" data-value="6">6+</button>
+
+                </div>
+            </div>
+
+            <input type="hidden" id="guests" value="2">
+
+            <button class="booking-btn" type="submit">
+                Confirm Table Booking
+            </button>
 
-<!-- EXPERIENCE -->
+        </form>
 
-<section class="section experience">
+        <div class="info-box">
+            <div class="info-icon">📱</div>
+            <div>
+                <strong>Booking confirmation</strong>
+                <p>Your booking details will be sent to Khan's Restaurant via WhatsApp.</p>
+            </div>
+        </div>
 
-<div class="container">
+    </div>
 
-<div class="kicker">
-THE KHANS EXPERIENCE
-</div>
+</main>
 
-<h2 class="title">
-More Than A Meal
-</h2>
-
-<div class="line"></div>
-
-<div class="cards">
-
-<div class="card">
-<div class="icon">🍛</div>
-<h3>Authentic Flavours</h3>
-<p>
-Traditional Indian recipes prepared with
-carefully selected spices and ingredients.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">🔥</div>
-<h3>From The Tandoor</h3>
-<p>
-Discover charcoal-grilled tandoori
-specialities prepared fresh for your table.
-</p>
-</div>
-
-<div class="card">
-<div class="icon">✨</div>
-<h3>Est. 1977</h3>
-<p>
-A restaurant built around tradition,
-hospitality and generations of flavour.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- SPECIALITIES -->
-
-<section class="section specialities" id="specialities">
-
-<div class="container">
-
-<div class="kicker">
-KHANS SPECIALITIES
-</div>
-
-<h2 class="title">
-Favourites From Our Kitchen
-</h2>
-
-<div class="line"></div>
-
-<div class="food-grid">
-
-<div class="food">
-
-<img src="food1.jpg"
-alt="Tandoori Chicken">
-
-<div class="food-overlay">
-<div>
-<div class="food-name">
-Tandoori Chicken
-</div>
-<div class="food-price">
-£14.50 Full
-</div>
-</div>
-</div>
-
-</div>
-
-<div class="food">
-
-<img src="food2.jpg"
-alt="Butter Chicken">
-
-<div class="food-overlay">
-<div>
-<div class="food-name">
-Butter Chicken
-</div>
-<div class="food-price">
-£13.60
-</div>
-</div>
-</div>
-
-</div>
-
-<div class="food">
-
-<img src="food3.jpg"
-alt="Mixed Grill">
-
-<div class="food-overlay">
-<div>
-<div class="food-name">
-Mixed Grill
-</div>
-<div class="food-price">
-£24.00
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- GALLERY -->
-
-<section class="section gallery" id="gallery">
-
-<div class="container">
-
-<div class="kicker">
-KHANS GALLERY
-</div>
-
-<h2 class="title">
-A Taste Before You Arrive
-</h2>
-
-<div class="line"></div>
-
-<div class="gallery-grid">
-
-<img class="gallery-large"
-src="restaurant.jpg"
-alt="Khans Restaurant">
-
-<img src="food1.jpg" alt="Indian food">
-
-<img src="food2.jpg" alt="Indian food">
-
-<img src="food3.jpg" alt="Indian food">
-
-<img src="food4.jpg" alt="Indian food">
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- MENU -->
-
-<section class="section menu" id="menu">
-
-<div class="container">
-
-<div class="kicker">
-KHANS RESTAURANT
-</div>
-
-<h2 class="title">
-Our Menu
-</h2>
-
-<div class="line"></div>
-
-<p class="description">
-Explore our authentic Indian starters, tandoori
-specialities, curries, biryanis, breads,
-vegetarian dishes and refreshing drinks.
-</p>
-
-<div class="search">
-
-<input
-id="menuSearch"
-type="search"
-placeholder="Search our menu..."
-onkeyup="searchMenu()">
-
-</div>
-
-<div class="categories">
-
-<button class="category active"
-onclick="goTo('starters')">
-STARTERS
-</button>
-
-<button class="category"
-onclick="goTo('tandoori')">
-TANDOORI
-</button>
-
-<button class="category"
-onclick="goTo('chicken')">
-CHICKEN
-</button>
-
-<button class="category"
-onclick="goTo('meat')">
-MEAT
-</button>
-
-<button class="category"
-onclick="goTo('seafood')">
-SEAFOOD
-</button>
-
-<button class="category"
-onclick="goTo('vegetable')">
-VEGETABLE
-</button>
-
-<button class="category"
-onclick="goTo('biryani')">
-BIRYANI
-</button>
-
-<button class="category"
-onclick="goTo('breads')">
-BREADS
-</button>
-
-<button class="category"
-onclick="goTo('drinks')">
-DRINKS
-</button>
-
-</div>
-
-
-<!-- STARTERS -->
-
-<div class="menu-section" id="starters">
-
-<h3>Starters</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Tray Of Chutney</div>
-</div>
-<div class="menu-price">£1.75</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Pappadam</div>
-</div>
-<div class="menu-price">£1.75 each</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Onions Bhaji (D/G)</div>
-<div class="menu-desc">
-Crispy fritters made from thinly sliced onions,
-seasoned with aromatic spices.
-</div>
-</div>
-<div class="menu-price">£6.45</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Veg Samosa (G)</div>
-<div class="menu-desc">Portion of two.</div>
-</div>
-<div class="menu-price">£5.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Meat Samosa (G/D/N)</div>
-<div class="menu-desc">Portion of two.</div>
-</div>
-<div class="menu-price">£5.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chilli Paneer (D)</div>
-<div class="menu-desc">
-Paneer cubes and peppers tossed in homemade sauce.
-</div>
-</div>
-<div class="menu-price">£8.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Khans Masala Chips</div>
-<div class="menu-desc">
-Tossed in Khans homemade sauce. Contains molluscs.
-</div>
-</div>
-<div class="menu-price">£5.75</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Dal Soup</div>
-<div class="menu-desc">
-Smashed lentils flavoured with apple and Indian spice.
-</div>
-</div>
-<div class="menu-price">£5.75</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Fish Amritsari</div>
-<div class="menu-desc">
-Tilapia pieces coated in gram flour and spices,
-deep fried.
-</div>
-</div>
-<div class="menu-price">£14.00</div>
-</div>
-
-</div>
-
-
-<!-- BOMBAY -->
-
-<div class="menu-section">
-
-<h3>Bombay Chowpatty</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Samosa Chaat (D/G)</div>
-<div class="menu-desc">
-Punjabi samosa in yoghurt, green chutney,
-tamarind sauce, sev and dry plum sauce.
-</div>
-</div>
-<div class="menu-price">£7.95</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Channa Chaat (D/G)</div>
-<div class="menu-desc">
-Chickpeas, potatoes, crispy snacks, sweet yogurt,
-tamarind sauce, mint coriander sauce and sev.
-</div>
-</div>
-<div class="menu-price">£6.90</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Gol Gappe (D/G)</div>
-<div class="menu-desc">
-Wheat puffs filled with masala potatoes.
-Served with sweet and sour tamarind water shots.
-</div>
-</div>
-<div class="menu-price">£6.25</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Dhahi Puri (D)</div>
-<div class="menu-desc">
-Wheat puffs filled with sweet yogurt, chutney,
-tamarind sauce, sev and pomegranate.
-</div>
-</div>
-<div class="menu-price">£6.25</div>
-</div>
-
-</div>
-
-
-<!-- TANDOORI -->
-
-<div class="menu-section" id="tandoori">
-
-<h3>Tandoori Specialities</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Full Tandoori Chicken (D/M)</div>
-<div class="menu-desc">Tangy chicken cooked in tandoor.</div>
-</div>
-<div class="menu-price">£14.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Half Tandoori Chicken (D/M)</div>
-</div>
-<div class="menu-price">£9.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Grilled Lamb Chops (D/M/N)</div>
-<div class="menu-desc">
-Chops marinated with special ground spices
-and cooked in charcoal grill.
-</div>
-</div>
-<div class="menu-price">£14.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Tandoori Chicken Wings (D)</div>
-<div class="menu-desc">
-Chicken wings on the bone marinated in Khans paste
-and barbequed on a skewer.
-</div>
-</div>
-<div class="menu-price">£8.00</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Tikka (D/M)</div>
-<div class="menu-desc">
-Diced chicken prepared in spices and barbequed
-in clay oven.
-</div>
-</div>
-<div class="menu-price">£11.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Meat Sheek Kebab</div>
-<div class="menu-desc">
-Spiced mince meat skewers cooked in clay oven.
-</div>
-</div>
-<div class="menu-price">£13.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Lamb Ribs (D)</div>
-<div class="menu-desc">Cooked in special sauce.</div>
-</div>
-<div class="menu-price">£13.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Tandoori King Prawns (D)</div>
-<div class="menu-desc">
-Caraway seeds with spicy yoghurt marinated
-king prawns, charcoal grilled.
-</div>
-</div>
-<div class="menu-price">£17.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Fish Tikka</div>
-<div class="menu-desc">Cod fish with mustard.</div>
-</div>
-<div class="menu-price">£15.00</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Paneer Tikka (D/M)</div>
-<div class="menu-desc">
-Spiced yogurt, cube of cottage cheese
-grilled in a clay oven.
-</div>
-</div>
-<div class="menu-price">£10.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Mixed Grill (D/G/N/M)</div>
-<div class="menu-desc">
-Lamb chops, meat sheek kebab, tandoori chicken,
-chicken tikka and chicken wings charcoal grilled,
-served with naan.
-</div>
-</div>
-<div class="menu-price">£24.00</div>
-</div>
-
-</div>
-
-
-<!-- FUSION -->
-
-<div class="menu-section">
-
-<h3>Fusion Dishes</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Lamb Shank (D)</div>
-<div class="menu-desc">
-Shank of lamb cooked in an intense aromatic curry
-on bone stock and spices — Lucknowi style.
-</div>
-</div>
-<div class="menu-price">£19.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">King Prawn Zaffroni</div>
-<div class="menu-desc">
-Grilled prawns served with saffron rice and moily sauce.
-</div>
-</div>
-<div class="menu-price">£19.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Lollipops</div>
-<div class="menu-desc">
-Portion of five. Tossed in Khans homemade sauce.
-</div>
-</div>
-<div class="menu-price">£8.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Sweet & Chilli Prawns</div>
-<div class="menu-desc">
-Deep fried tiger prawns Maharashtrian style.
-</div>
-</div>
-<div class="menu-price">£14.00</div>
-</div>
-
-</div>
-
-
-<!-- CHICKEN -->
-
-<div class="menu-section" id="chicken">
-
-<h3>Chicken Dishes</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Butter Chicken (D/M/N)</div>
-<div class="menu-desc">
-Barbecued chicken tikka simmered in rich tomato
-butter sauce.
-</div>
-</div>
-<div class="menu-price">£13.60</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Tikka Masala (D/M/N)</div>
-<div class="menu-desc">
-Diced chicken cooked in masala sauce and coconut.
-</div>
-</div>
-<div class="menu-price">£12.60</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Chilli Masala (D)</div>
-<div class="menu-desc">
-Chicken tikka cooked in hot spicy chilli sauce
-and roasted fresh garlic.
-</div>
-</div>
-<div class="menu-price">£12.60</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Jalfrezi (D)</div>
-<div class="menu-desc">
-Chicken strips tossed in onions and bell pepper.
-</div>
-</div>
-<div class="menu-price">£12.60</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Bhuna (M)</div>
-<div class="menu-desc">Fairly dry medium chicken curry.</div>
-</div>
-<div class="menu-price">£11.60</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Saag Chicken (M)</div>
-<div class="menu-desc">
-Cubes of chicken cooked with fresh spinach,
-tempered garlic and cumin seeds.
-</div>
-</div>
-<div class="menu-price">£11.60</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Korma</div>
-<div class="menu-desc">
-Mild chicken with cream, coconut and nuts.
-</div>
-</div>
-<div class="menu-price">£11.25</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Bourji</div>
-<div class="menu-desc">
-Boneless chicken cooked in onions,
-yoghurt and coconut.
-</div>
-</div>
-<div class="menu-price">£12.60</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Curry</div>
-<div class="menu-desc">
-Other options — Madras or Vindaloo.
-</div>
-</div>
-<div class="menu-price">£11.25</div>
-</div>
-
-</div>
-
-
-<!-- MEAT -->
-
-<div class="menu-section" id="meat">
-
-<h3>Meat Dishes</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Meat Curry</div>
-<div class="menu-desc">
-Other options — Madras or Vindaloo.
-</div>
-</div>
-<div class="menu-price">£12.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Bhuna Gosht</div>
-<div class="menu-desc">
-Boneless lamb pieces, cooked with onions
-and tomatoes based bhuna masala.
-</div>
-</div>
-<div class="menu-price">£12.75</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Karahi Gosht</div>
-<div class="menu-desc">
-Lamb on bone in spicy sauce with onion,
-peppers and karahi masala.
-</div>
-</div>
-<div class="menu-price">£13.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Saag Gosht</div>
-<div class="menu-desc">
-Tender lamb cooked with spices, fresh spinach,
-garlic and cumin seeds.
-</div>
-</div>
-<div class="menu-price">£12.75</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Rogan Josh</div>
-<div class="menu-desc">
-Classic Kashmiri delicacy. Diced lamb cooked
-in onion and tomato sauce finished with almond flakes.
-</div>
-</div>
-<div class="menu-price">£12.75</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Keema Mutter & Potato</div>
-<div class="menu-desc">
-Minced lamb, potatoes, peas and spices
-cooked Hyderabad style.
-</div>
-</div>
-<div class="menu-price">£11.95</div>
-</div>
-
-</div>
-
-
-<!-- SEAFOOD -->
-
-<div class="menu-section" id="seafood">
-
-<h3>Seafood Dishes</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Tandoori King Prawn Masala (D/M/N)</div>
-<div class="menu-desc">
-Tandoori king prawns in cashew and tomato sauce.
-</div>
-</div>
-<div class="menu-price">£18.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">King Prawns Bhuna</div>
-<div class="menu-desc">
-Tiger prawns in a reduced curry sauce.
-</div>
-</div>
-<div class="menu-price">£16.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">King Prawn Curry</div>
-<div class="menu-desc">
-Prawns cooked in special homemade sauce.
-</div>
-</div>
-<div class="menu-price">£16.75</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Fish Tikka Curry (D/M)</div>
-<div class="menu-desc">
-Cod served with special homemade sauce.
-</div>
-</div>
-<div class="menu-price">£16.50</div>
-</div>
-
-</div>
-
-
-<!-- VEGETABLE -->
-
-<div class="menu-section" id="vegetable">
-
-<h3>Vegetable Dishes</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Paneer Tikka Masala (D/N)</div>
-<div class="menu-desc">
-Cottage cheese cooked in tandoor and masala sauce.
-</div>
-</div>
-<div class="menu-price">£12.25</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Saag Aloo (M)</div>
-<div class="menu-desc">
-Potato, fresh spinach, garlic and cumin.
-</div>
-</div>
-<div class="menu-price">£8.20</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Bombay Aloo (M)</div>
-</div>
-<div class="menu-price">£8.20</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Saag Bhaji (M)</div>
-<div class="menu-desc">
-Fresh chopped spinach tossed with garlic and cumin.
-</div>
-</div>
-<div class="menu-price">£8.20</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Saag Paneer (D/N)</div>
-<div class="menu-desc">
-Spinach cooked with home-made cheese.
-</div>
-</div>
-<div class="menu-price">£8.20</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Bhindi Bhaji (D/N)</div>
-<div class="menu-desc">
-Diced okra in dry masala sauce.
-</div>
-</div>
-<div class="menu-price">£8.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Mixed Veg Curry</div>
-</div>
-<div class="menu-price">£8.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Dal Makhani (D)</div>
-<div class="menu-desc">
-A creamy textured black lentil delicacy.
-</div>
-</div>
-<div class="menu-price">£9.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Tadka Dal (M)</div>
-</div>
-<div class="menu-price">£8.20</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chana Masala</div>
-</div>
-<div class="menu-price">£8.20</div>
-</div>
-
-</div>
-
-
-<!-- THALIS -->
-
-<div class="menu-section">
-
-<h3>Thalis</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Veg Thali (D/G/N/M)</div>
-<div class="menu-desc">
-Paneer tikka, veg samosa, saag aloo, dal makhani,
-veg curry, rice, naan, pappadam, salad,
-raita and gulab jamun.
-</div>
-</div>
-<div class="menu-price">£21.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Non-Veg Thali (D/G/N/M)</div>
-<div class="menu-desc">
-Chicken tikka, sheek kebab, butter chicken,
-bhuna gosht, tadka dal, rice, naan,
-pappadam, salad, raita and gulab jamun.
-</div>
-</div>
-<div class="menu-price">£25.00</div>
-</div>
-
-</div>
-
-
-<!-- BIRYANI -->
-
-<div class="menu-section" id="biryani">
-
-<h3>Biryani</h3>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Meat Biryani (D)</div></div><div class="menu-price">£14.25</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Chicken Biryani (D)</div></div><div class="menu-price">£13.75</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Chicken Tikka Biryani</div></div><div class="menu-price">£14.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">King Prawn Biryani (D)</div></div><div class="menu-price">£18.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Vegetable Biryani (D)</div></div><div class="menu-price">£11.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Fish Tikka Biryani (D)</div></div><div class="menu-price">£16.50</div></div>
-
-</div>
-
-
-<!-- BREADS -->
-
-<div class="menu-section" id="breads">
-
-<h3>Breads</h3>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Tandoori Naan (D/G)</div></div><div class="menu-price">£3.55</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Tandoori Roti (G)</div></div><div class="menu-price">£3.55</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Garlic Naan (D/G)</div></div><div class="menu-price">£4.75</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Peshawari Naan (D/G/N)</div></div><div class="menu-price">£4.99</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Keema Naan (D/G)</div></div><div class="menu-price">£4.99</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Paratha (G)</div></div><div class="menu-price">£4.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Paneer Kulcha</div></div><div class="menu-price">£4.99</div></div>
-
-</div>
-
-
-<!-- RICE -->
-
-<div class="menu-section">
-
-<h3>Rice</h3>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Pilau Rice</div></div><div class="menu-price">£4.60</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Rice</div></div><div class="menu-price">£4.35</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Special Fried Rice (D)</div></div><div class="menu-price">£7.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Biryani Rice</div></div><div class="menu-price">£7.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Keema Rice</div></div><div class="menu-price">£8.50</div></div>
-
-</div>
-
-
-<!-- SIDES -->
-
-<div class="menu-section">
-
-<h3>Sides</h3>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Chips</div></div><div class="menu-price">£4.00</div></div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Fattoush Salad</div>
-<div class="menu-desc">
-Croutons, iceberg lettuce, bell pepper, carrot,
-cucumber mixed with sumac and olive oil.
-</div>
-</div>
-<div class="menu-price">£6.50</div>
-</div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Mixed Salad</div></div><div class="menu-price">£5.99</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Raita</div></div><div class="menu-price">£4.50</div></div>
-
-</div>
-
-
-<!-- KIDS -->
-
-<div class="menu-section">
-
-<h3>Kids Choices</h3>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Butter Chicken (D/M/N)</div>
-<div class="menu-desc">Served with rice.</div>
-</div>
-<div class="menu-price">£10.00</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Korma</div>
-<div class="menu-desc">Served with rice.</div>
-</div>
-<div class="menu-price">£9.00</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Chicken Nuggets With Chips (G)</div>
-</div>
-<div class="menu-price">£7.50</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Crispy Mini Chicken Burger (G)</div>
-<div class="menu-desc">
-Minced chicken in bread served with chips.
-</div>
-</div>
-<div class="menu-price">£8.50</div>
-</div>
-
-</div>
-
-
-<!-- DRINKS -->
-
-<div class="menu-section" id="drinks">
-
-<h3>Drinks</h3>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Strawberry Colado</div></div><div class="menu-price">£8.30</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Pineapple Colado</div></div><div class="menu-price">£8.30</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Khans Minty Dynamite</div></div><div class="menu-price">£8.60</div></div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Fresh Juice</div>
-<div class="menu-desc">
-Orange, Apple, Carrot, Mix Fruit.
-</div>
-</div>
-<div class="menu-price">£6.99</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Mojitos</div>
-<div class="menu-desc">
-Strawberry Mojito, Classic Mint, Passion, Lychee.
-</div>
-</div>
-<div class="menu-price">£5.99–£6.25</div>
-</div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Milkshakes</div>
-<div class="menu-desc">
-Strawberry, Kinder Bueno, Oreo, Biscoff,
-Snickers, Ferrero Rocher.
-</div>
-</div>
-<div class="menu-price">£6.99</div>
-</div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Mango Lassi (D)</div></div><div class="menu-price">£6.20</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Sweet Lassi (D)</div></div><div class="menu-price">£6.10</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Salted Lassi (D)</div></div><div class="menu-price">£6.10</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Faluda (D/N/G)</div></div><div class="menu-price">£7.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Lemon Juice</div></div><div class="menu-price">£5.99</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Mojito Jug</div></div><div class="menu-price">£17.75</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Lassi Jug (D)</div></div><div class="menu-price">£15.99</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Mango Lassi Jug (D)</div></div><div class="menu-price">£17.75</div></div>
-
-<div class="menu-item">
-<div class="menu-info">
-<div class="menu-name">Soft Drinks</div>
-<div class="menu-desc">
-Coke / Coke Zero / Diet Coke,
-Rubicon Mango, Tango Orange, 7up.
-</div>
-</div>
-<div class="menu-price">£2.99</div>
-</div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Sparkling Water Small</div></div><div class="menu-price">£3.00</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Sparkling Water Large</div></div><div class="menu-price">£5.50</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Still Water Small</div></div><div class="menu-price">£3.00</div></div>
-
-<div class="menu-item"><div class="menu-info"><div class="menu-name">Still Water Large</div></div><div class="menu-price">£5.50</div></div>
-
-</div>
-
-
-<div class="allergy">
-
-<strong>(G)</strong> CONTAINS GLUTEN &nbsp;
-<strong>(D)</strong> CONTAINS DAIRY &nbsp;
-<strong>(N)</strong> CONTAINS NUTS &nbsp;
-<strong>(M)</strong> CONTAINS MUSTARD.
-
-<br><br>
-
-For spice adjustments or allergy concerns,
-please speak to our staff, who will gladly assist you.
-All prices include VAT. Please note we do not accept cheques.
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ==========================================
-     PROFESSIONAL TABLE BOOKING
-========================================== -->
-
-<section class="section booking" id="booking">
-
-<div class="container">
-
-<div class="kicker">
-KHANS RESTAURANT
-</div>
-
-<h2 class="title">
-Reserve Your Table
-</h2>
-
-<div class="line"></div>
-
-<p class="booking-intro">
-Choose your preferred date, time and table.
-Complete your details and send your reservation
-directly to Khans Restaurant through WhatsApp.
-</p>
-
-<div class="booking-wrapper">
-
-<div class="booking-fields">
-
-<div class="booking-field">
-<label for="bookingDate">DATE</label>
-<input
-type="date"
-id="bookingDate"
-required>
-</div>
-
-<div class="booking-field">
-<label for="bookingTime">TIME</label>
-<select id="bookingTime" required>
-<option value="">Select a time</option>
-<option>12:00 PM</option>
-<option>12:30 PM</option>
-<option>1:00 PM</option>
-<option>1:30 PM</option>
-<option>2:00 PM</option>
-<option>2:30 PM</option>
-<option>3:00 PM</option>
-<option>5:00 PM</option>
-<option>5:30 PM</option>
-<option>6:00 PM</option>
-<option>6:30 PM</option>
-<option>7:00 PM</option>
-<option>7:30 PM</option>
-<option>8:00 PM</option>
-<option>8:30 PM</option>
-<option>9:00 PM</option>
-<option>9:30 PM</option>
-<option>10:00 PM</option>
-</select>
-</div>
-
-<div class="booking-field">
-<label for="bookingGuests">NUMBER OF GUESTS</label>
-<select id="bookingGuests" required onchange="updateTableAvailability()">
-<option value="">Select guests</option>
-<option value="1">1 Guest</option>
-<option value="2">2 Guests</option>
-<option value="3">3 Guests</option>
-<option value="4">4 Guests</option>
-<option value="5">5 Guests</option>
-<option value="6">6 Guests</option>
-<option value="7">7 Guests</option>
-<option value="8">8 Guests</option>
-<option value="9">9 Guests</option>
-<option value="10">10 Guests</option>
-<option value="11">11 Guests</option>
-<option value="12">12 Guests</option>
-</select>
-</div>
-
-<div class="booking-field">
-<label for="customerName">YOUR NAME</label>
-<input
-type="text"
-id="customerName"
-placeholder="Enter your name"
-autocomplete="name"
-required>
-</div>
-
-<div class="booking-field">
-<label for="customerPhone">PHONE NUMBER</label>
-<input
-type="tel"
-id="customerPhone"
-placeholder="Enter your phone number"
-autocomplete="tel"
-required>
-</div>
-
-</div>
-
-
-<div class="booking-step">
-SELECT YOUR TABLE
-</div>
-
-<div class="table-layout">
-
-<div class="table-card"
-data-table="Table 1"
-data-capacity="2"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 1</div>
-<div class="table-capacity">2 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 2"
-data-capacity="2"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 2</div>
-<div class="table-capacity">2 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 3"
-data-capacity="3"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 3</div>
-<div class="table-capacity">Up to 3 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 4"
-data-capacity="4"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 4</div>
-<div class="table-capacity">Up to 4 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 5"
-data-capacity="5"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 5</div>
-<div class="table-capacity">Up to 5 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 6"
-data-capacity="6"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 6</div>
-<div class="table-capacity">Up to 6 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 7"
-data-capacity="4"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 7</div>
-<div class="table-capacity">Up to 4 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 8"
-data-capacity="6"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 8</div>
-<div class="table-capacity">Up to 6 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 9"
-data-capacity="4"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 9</div>
-<div class="table-capacity">Up to 4 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 10"
-data-capacity="6"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 10</div>
-<div class="table-capacity">Up to 6 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 11"
-data-capacity="8"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 11</div>
-<div class="table-capacity">Up to 8 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-<div class="table-card"
-data-table="Table 12"
-data-capacity="10"
-onclick="selectTable(this)">
-<div class="table-icon">🪑</div>
-<div class="table-number">Table 12</div>
-<div class="table-capacity">Up to 10 Guests</div>
-<div class="table-status">AVAILABLE</div>
-</div>
-
-</div>
-
-
-<div
-class="booking-selected"
-id="bookingSelected">
-Selected:
-<strong id="selectedTableText">
-Please select a table
-</strong>
-</div>
-
-
-<button
-class="booking-submit"
-onclick="confirmTableBooking()">
-✅ CONFIRM BOOKING → WHATSAPP
-</button>
-
-<div class="booking-note">
-Your booking request will open WhatsApp with all reservation details.
-The restaurant will confirm the reservation with you.
-</div>
-
-<div
-class="booking-success"
-id="bookingSuccess">
-✓ Booking details prepared successfully.
-Opening WhatsApp…
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- DIGITAL MENU QR -->
-
-<section class="section qr-section">
-
-<div class="container">
-
-<div class="kicker">
-DIGITAL MENU
-</div>
-
-<h2 class="title">
-Scan. Explore. Enjoy.
-</h2>
-
-<div class="line"></div>
-
-<div class="qr-box">
-
-<img
-class="qr-image"
-src="qr-code.png"
-alt="Khans Restaurant QR Code">
-
-<div class="qr-title">
-Scan To View Khans Menu
-</div>
-
-<p class="qr-text">
-Scan the QR code with your phone camera
-to instantly open the Khans Restaurant website.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- REVIEWS -->
-
-<section class="section reviews">
-
-<div class="container">
-
-<div class="kicker">
-OUR GUESTS
-</div>
-
-<h2 class="title">
-What Our Guests Say
-</h2>
-
-<div class="line"></div>
-
-<div class="review-grid">
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>
-“A wonderful place for authentic Indian food
-and a great atmosphere.”
-</p>
-<div class="review-name">KHANS GUEST</div>
-</div>
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>
-“Beautiful flavours, excellent service and
-a memorable dining experience.”
-</p>
-<div class="review-name">KHANS GUEST</div>
-</div>
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>
-“Traditional Indian food with a fantastic
-selection for everyone.”
-</p>
-<div class="review-name">KHANS GUEST</div>
-</div>
-
-</div>
-
-<div style="text-align:center;margin-top:30px">
-
-<a class="btn gold"
-target="_blank"
-rel="noopener"
-href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
-⭐ VIEW GOOGLE REVIEWS
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="section contact" id="contact">
-
-<div class="container">
-
-<div class="kicker">
-VISIT KHANS
-</div>
-
-<h2 class="title">
-Come & Dine With Us
-</h2>
-
-<div class="line"></div>
-
-<div class="contact-grid">
-
-<div class="contact-card">
-
-<div class="icon">📍</div>
-
-<h3>Find Us</h3>
-
-<p>
-13–15 Westbourne Grove<br>
-London, W2 4UA
-</p>
-
-<a class="small-btn"
-target="_blank"
-rel="noopener"
-href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
-GET DIRECTIONS →
-</a>
-
-</div>
-
-<div class="contact-card">
-
-<div class="icon">📞</div>
-
-<h3>Call Khans</h3>
-
-<p>
-0207 727 5420
-</p>
-
-<a class="small-btn"
-href="tel:02077275420">
-CALL NOW →
-</a>
-
-</div>
-
-<div class="contact-card">
-
-<div class="icon">🪑</div>
-
-<h3>Book A Table</h3>
-
-<p>
-Choose your table online
-and send the request through WhatsApp.
-</p>
-
-<a class="small-btn"
-href="#booking">
-BOOK NOW →
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CTA -->
-
-<section class="section cta">
-
-<div class="container">
-
-<div class="kicker">
-KHANS RESTAURANT
-</div>
-
-<h2 class="title">
-Your Table Awaits
-</h2>
-
-<div class="line"></div>
-
-<div class="action-buttons">
-
-<a class="btn gold"
-href="#booking">
-🪑 BOOK A TABLE
-</a>
-
-<a class="btn dark"
-href="tel:02077275420">
-📞 CALL TO BOOK
-</a>
-
-<a class="btn dark"
-target="_blank"
-rel="noopener"
-href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu">
-📍 DIRECTIONS
-</a>
-
-<button class="btn dark"
-onclick="shareKhan()">
-📤 SHARE KHANS
-</button>
-
-<button class="btn dark"
-onclick="openQRScanner()">
-📷 SCAN QR
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<div class="footer-logo">
-KHANS RESTAURANT
-</div>
-
-<div class="footer-tag">
-AUTHENTIC INDIAN FOOD • EST. 1977
-</div>
-
-<div class="footer-address">
-13–15 Westbourne Grove<br>
-London, W2 4UA<br>
-0207 727 5420
-</div>
-
-<div class="copyright">
-© 2026 Khans Restaurant. All Rights Reserved.
-</div>
-
+<footer class="footer">
+    <strong>Khan's Restaurant 🍽️</strong><br>
+    Authentic Indian Dining<br><br>
+    Table reservations via WhatsApp
 </footer>
 
 
-<!-- FLOATING BUTTONS -->
+<!-- CONFIRMATION MODAL -->
 
-<div class="floating">
+<div class="modal" id="modal">
 
-<a class="float-btn"
-href="tel:02077275420"
-title="Call">
-📞
-</a>
+    <div class="modal-card">
 
-<a class="float-btn"
-target="_blank"
-rel="noopener"
-href="https://www.google.com/maps/place/Khan's/@51.515621,-0.3291497,12z/data=!4m10!1m2!2m1!1skhans+restaurant+google+maps!3m6!1s0x487610002327c729:0x91215afc361da80b!8m2!3d51.515621!4d-0.189074!15sChxraGFucyByZXN0YXVyYW50IGdvb2dsZSBtYXBzIgOIAQFaEiIQa2hhbnMgcmVzdGF1cmFudJIBEWluZGlhbl9yZXN0YXVyYW504AEA!16s%2Fg%2F1tdkg3pw?entry=ttu"
-title="Directions">
-📍
-</a>
+        <div class="success">✓</div>
 
-<a class="float-btn"
-href="#menu"
-title="Menu">
-🍽️
-</a>
+        <h2>Booking Details Ready</h2>
 
-<a class="float-btn"
-href="#booking"
-title="Book a Table">
-🪑
-</a>
+        <p>
+            Please send the booking request to Khan's Restaurant
+            through WhatsApp.
+        </p>
 
-<button
-class="float-btn"
-onclick="openQRScanner()"
-title="Scan QR"
-aria-label="Scan QR Code">
-📷
-</button>
+        <div class="booking-summary" id="summary"></div>
+
+        <button class="whatsapp-btn" onclick="sendWhatsApp()">
+            💬 Send Booking on WhatsApp
+        </button>
+
+        <button class="close-btn" onclick="closeModal()">
+            Close
+        </button>
+
+    </div>
 
 </div>
-
-
-<!-- BACK TO TOP -->
-
-<button class="top"
-id="topBtn"
-onclick="window.scrollTo({top:0,behavior:'smooth'})">
-↑
-</button>
-
-
-<!-- ================================
-     QR SCANNER MODAL
-================================ -->
-
-<div
-class="scanner-modal"
-id="scannerModal"
-aria-hidden="true">
-
-<div
-class="scanner-box"
-role="dialog"
-aria-modal="true"
-aria-labelledby="scannerTitle">
-
-<div class="scanner-header">
-
-<h2 id="scannerTitle">
-Scan QR Code
-</h2>
-
-<button
-class="scanner-close"
-onclick="closeQRScanner()"
-aria-label="Close QR scanner">
-×
-</button>
-
-</div>
-
-
-<div class="scanner-camera">
-
-<video
-id="qrVideo"
-autoplay
-muted
-playsinline>
-</video>
-
-<div class="scanner-frame"></div>
-
-<div class="scanner-corners"></div>
-
-<div class="scanner-line"></div>
-
-</div>
-
-
-<div
-class="scanner-status"
-id="scannerStatus">
-Point your camera at a QR code
-</div>
-
-
-<div
-class="scanner-result"
-id="scannerResult">
-
-<div class="scanner-result-label">
-✓ QR CODE DETECTED
-</div>
-
-<div
-class="scanner-result-text"
-id="scannerResultText">
-</div>
-
-
-<div class="scanner-actions">
-
-<button
-class="scanner-action primary"
-id="openQRButton"
-onclick="openQRResult()"
-disabled>
-OPEN LINK
-</button>
-
-<button
-class="scanner-action"
-onclick="copyQRResult()">
-COPY RESULT
-</button>
-
-</div>
-
-</div>
-
-
-<div class="scanner-actions">
-
-<button
-class="scanner-action"
-onclick="closeQRScanner()">
-CLOSE SCANNER
-</button>
-
-</div>
-
-
-<div class="scanner-note">
-Allow camera access when your browser asks.
-The scanner works on HTTPS websites.
-</div>
-
-</div>
-
-</div>
-
-
-<!-- QR SCANNER LIBRARY -->
-
-<script
-src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js">
-</script>
 
 
 <script>
 
-/* ==========================================
-   LOADER
-========================================== */
+const form = document.getElementById("bookingForm");
+const modal = document.getElementById("modal");
+const summary = document.getElementById("summary");
 
-window.addEventListener("load",function(){
+let bookingData = {};
 
-setTimeout(function(){
+const guestButtons =
+document.querySelectorAll(".people-selector button");
 
-const loader =
-document.getElementById("loader");
+guestButtons.forEach(button => {
 
-if(loader){
-loader.classList.add("hide");
-}
+    button.addEventListener("click", function(){
 
-},700);
+        guestButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
 
-});
+        this.classList.add("active");
 
+        document.getElementById("guests").value =
+            this.dataset.value;
 
-/* ==========================================
-   MENU SEARCH
-========================================== */
-
-function searchMenu(){
-
-const input =
-document
-.getElementById("menuSearch")
-.value
-.toLowerCase()
-.trim();
-
-const items =
-document.querySelectorAll(".menu-item");
-
-items.forEach(function(item){
-
-const text =
-item.innerText.toLowerCase();
-
-item.style.display =
-text.includes(input)
-? "flex"
-: "none";
-
-});
-
-}
-
-
-/* ==========================================
-   CATEGORY
-========================================== */
-
-function goTo(id){
-
-const el =
-document.getElementById(id);
-
-if(el){
-
-el.scrollIntoView({
-behavior:"smooth",
-block:"start"
-});
-
-}
-
-}
-
-
-/* ==========================================
-   SHARE
-========================================== */
-
-function shareKhan(){
-
-const url =
-"https://hegdepavan199912-cell.github.io/khans-restaurant/";
-
-if(navigator.share){
-
-navigator.share({
-
-title:"Khans Restaurant",
-
-text:"Khans Restaurant — Authentic Indian Food, Est. 1977",
-
-url:url
-
-}).catch(function(){});
-
-}else if(navigator.clipboard){
-
-navigator.clipboard
-.writeText(url)
-.then(function(){
-
-alert("Khans website link copied!");
-
-})
-.catch(function(){
-
-alert("Khans website link: " + url);
-
-});
-
-}else{
-
-alert("Khans website link: " + url);
-
-}
-
-}
-
-
-/* ==========================================
-   TOP BUTTON
-========================================== */
-
-window.addEventListener("scroll",function(){
-
-const btn =
-document.getElementById("topBtn");
-
-if(window.scrollY > 600){
-
-btn.classList.add("show");
-
-}else{
-
-btn.classList.remove("show");
-
-}
+    });
 
 });
 
 
-/* ==========================================
-   VIDEO FALLBACK
-========================================== */
+/* SET MINIMUM DATE TO TODAY */
 
-const video =
-document.querySelector(".hero-video");
+const today = new Date();
 
-if(video){
-
-video.addEventListener("error",function(){
-
-video.style.display="none";
-
-});
-
-}
-
-
-/* ==========================================
-   PROFESSIONAL TABLE BOOKING
-========================================== */
-
-let selectedTable = null;
-
-
-/* SET MINIMUM DATE */
-
-function setBookingDate(){
-
-const dateInput =
-document.getElementById("bookingDate");
-
-if(!dateInput){
-return;
-}
-
-const now = new Date();
-
-const year =
-now.getFullYear();
+const year = today.getFullYear();
 
 const month =
-String(now.getMonth()+1).padStart(2,"0");
+String(today.getMonth() + 1).padStart(2,"0");
 
 const day =
-String(now.getDate()).padStart(2,"0");
+String(today.getDate()).padStart(2,"0");
 
-const today =
-year + "-" + month + "-" + day;
-
-dateInput.min = today;
-
-}
+document.getElementById("date").min =
+`${year}-${month}-${day}`;
 
 
-/* SELECT TABLE */
+/* BOOKING FORM */
 
-function selectTable(card){
+form.addEventListener("submit", function(e){
 
-const guests =
-parseInt(
-document.getElementById("bookingGuests").value || "0",
-10
-);
+    e.preventDefault();
 
-const capacity =
-parseInt(card.dataset.capacity,10);
+    const name =
+        document.getElementById("name").value.trim();
 
+    const phone =
+        document.getElementById("phone").value.trim();
 
-/* Require guests first */
+    const email =
+        document.getElementById("email").value.trim();
 
-if(!guests){
+    const date =
+        document.getElementById("date").value;
 
-alert("Please select the number of guests first.");
+    const time =
+        document.getElementById("time").value;
 
-document
-.getElementById("bookingGuests")
-.focus();
-
-return;
-
-}
+    const guests =
+        document.getElementById("guests").value;
 
 
-/* Prevent table too small */
+    if(!name || !phone || !date || !time){
 
-if(guests > capacity){
+        alert("Please complete all required details.");
 
-alert(
-"This table is suitable for up to " +
-capacity +
-" guests. Please select a larger table."
-);
-
-return;
-
-}
+        return;
+    }
 
 
-/* Remove previous selection */
+    const formattedDate =
+        new Date(date + "T00:00:00")
+        .toLocaleDateString("en-GB",{
+            weekday:"long",
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        });
 
-document
-.querySelectorAll(".table-card")
-.forEach(function(item){
 
-item.classList.remove("selected");
+    bookingData = {
+        name,
+        phone,
+        email,
+        date:formattedDate,
+        time,
+        guests
+    };
+
+
+    summary.innerHTML = `
+        <strong>Booking Summary</strong><br><br>
+
+        👤 <b>Name:</b> ${escapeHTML(name)}<br>
+
+        📞 <b>Phone:</b> ${escapeHTML(phone)}<br>
+
+        📅 <b>Date:</b> ${formattedDate}<br>
+
+        🕐 <b>Time:</b> ${escapeHTML(time)}<br>
+
+        👥 <b>Guests:</b> ${escapeHTML(guests)}
+    `;
+
+
+    modal.classList.add("show");
 
 });
 
 
-/* Select current */
+/* WHATSAPP */
 
-card.classList.add("selected");
+function sendWhatsApp(){
 
-selectedTable = {
+    const restaurantNumber = "447878627797";
 
-name:card.dataset.table,
+    const message =
+`🍽️ KHAN'S RESTAURANT
+TABLE BOOKING REQUEST
 
-capacity:capacity
+━━━━━━━━━━━━━━━━━━
 
-};
+👤 Name: ${bookingData.name}
+📞 Phone: ${bookingData.phone}
+${bookingData.email ? "📧 Email: " + bookingData.email + "\n" : ""}📅 Date: ${bookingData.date}
+🕐 Time: ${bookingData.time}
+👥 Guests: ${bookingData.guests}
+
+━━━━━━━━━━━━━━━━━━
+
+Please confirm my table booking.
+
+Thank you.`;
+
+    const whatsappURL =
+        "https://wa.me/" +
+        restaurantNumber +
+        "?text=" +
+        encodeURIComponent(message);
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+}
 
 
-/* Show selection */
+/* CLOSE */
 
-const selectedBox =
-document.getElementById("bookingSelected");
+function closeModal(){
 
-const selectedText =
-document.getElementById("selectedTableText");
-
-selectedText.textContent =
-selectedTable.name +
-" • Up to " +
-selectedTable.capacity +
-" guests";
-
-selectedBox.classList.add("show");
+    modal.classList.remove("show");
 
 }
 
 
-/* UPDATE TABLES BASED ON GUEST COUNT */
+/* ESCAPE HTML */
 
-function updateTableAvailability(){
+function escapeHTML(text){
 
-const guests =
-parseInt(
-document.getElementById("bookingGuests").value || "0",
-10
-);
+    const div =
+        document.createElement("div");
 
-const cards =
-document.querySelectorAll(".table-card");
+    div.textContent = text;
 
-
-/* Clear current selection */
-
-selectedTable = null;
-
-document
-.getElementById("bookingSelected")
-.classList.remove("show");
-
-
-cards.forEach(function(card){
-
-card.classList.remove("selected");
-
-const capacity =
-parseInt(card.dataset.capacity,10);
-
-const status =
-card.querySelector(".table-status");
-
-
-if(!guests){
-
-card.style.opacity="1";
-
-status.textContent="AVAILABLE";
-
-status.style.color="#78d88a";
-
-return;
-
+    return div.innerHTML;
 }
 
 
-if(capacity >= guests){
+/* CLOSE WHEN CLICKING OUTSIDE */
 
-card.style.opacity="1";
+modal.addEventListener("click",function(e){
 
-status.textContent="SUITABLE";
-
-status.style.color="#78d88a";
-
-}else{
-
-card.style.opacity=".35";
-
-status.textContent="TOO SMALL";
-
-status.style.color="#999";
-
-}
-
-});
-
-}
-
-
-/* CONFIRM BOOKING */
-
-function confirmTableBooking(){
-
-const date =
-document
-.getElementById("bookingDate")
-.value;
-
-const time =
-document
-.getElementById("bookingTime")
-.value;
-
-const guests =
-document
-.getElementById("bookingGuests")
-.value;
-
-const name =
-document
-.getElementById("customerName")
-.value
-.trim();
-
-const phone =
-document
-.getElementById("customerPhone")
-.value
-.trim();
-
-
-/* VALIDATION */
-
-if(!date){
-
-alert("Please select your booking date.");
-
-document
-.getElementById("bookingDate")
-.focus();
-
-return;
-
-}
-
-
-if(!time){
-
-alert("Please select your booking time.");
-
-document
-.getElementById("bookingTime")
-.focus();
-
-return;
-
-}
-
-
-if(!guests){
-
-alert("Please select the number of guests.");
-
-document
-.getElementById("bookingGuests")
-.focus();
-
-return;
-
-}
-
-
-if(!selectedTable){
-
-alert("Please select a table.");
-
-return;
-
-}
-
-
-if(!name){
-
-alert("Please enter your name.");
-
-document
-.getElementById("customerName")
-.focus();
-
-return;
-
-}
-
-
-if(!phone){
-
-alert("Please enter your phone number.");
-
-document
-.getElementById("customerPhone")
-.focus();
-
-return;
-
-}
-
-
-/* FORMAT DATE */
-
-const dateObject =
-new Date(date + "T12:00:00");
-
-const formattedDate =
-dateObject.toLocaleDateString(
-"en-GB",
-{
-weekday:"long",
-day:"2-digit",
-month:"long",
-year:"numeric"
-}
-);
-
-
-/* WHATSAPP NUMBER */
-
-const whatsappNumber =
-"971569544805";
-
-
-/* MESSAGE */
-
-const message =
-"🍽️ *KHANS RESTAURANT – TABLE BOOKING*%0A" +
-"%0A" +
-"👤 *Customer:* " +
-encodeURIComponent(name) +
-"%0A" +
-"📞 *Phone:* " +
-encodeURIComponent(phone) +
-"%0A" +
-"📅 *Date:* " +
-encodeURIComponent(formattedDate) +
-"%0A" +
-"🕐 *Time:* " +
-encodeURIComponent(time) +
-"%0A" +
-"👥 *Guests:* " +
-encodeURIComponent(guests) +
-"%0A" +
-"🪑 *Table:* " +
-encodeURIComponent(selectedTable.name) +
-"%0A" +
-"%0A" +
-"Please confirm my table booking. Thank you.";
-
-
-/* SHOW SUCCESS */
-
-const success =
-document.getElementById("bookingSuccess");
-
-success.style.display="block";
-
-
-/* WHATSAPP URL */
-
-const whatsappURL =
-"https://wa.me/" +
-whatsappNumber +
-"?text=" +
-message;
-
-
-/* OPEN WHATSAPP */
-
-setTimeout(function(){
-
-window.open(
-whatsappURL,
-"_blank",
-"noopener,noreferrer"
-);
-
-},300);
-
-}
-
-
-/* SET DATE WHEN PAGE LOADS */
-
-setBookingDate();
-
-
-/* ==========================================
-   QR CODE SCANNER
-========================================== */
-
-let qrStream = null;
-
-let qrAnimation = null;
-
-let qrResult = "";
-
-let qrResultIsLink = false;
-
-let scannerBusy = false;
-
-
-const qrVideo =
-document.getElementById("qrVideo");
-
-const qrCanvas =
-document.createElement("canvas");
-
-const qrContext =
-qrCanvas.getContext("2d",{
-willReadFrequently:true
-});
-
-
-/* OPEN SCANNER */
-
-function openQRScanner(){
-
-const modal =
-document.getElementById(
-"scannerModal"
-);
-
-const status =
-document.getElementById(
-"scannerStatus"
-);
-
-const result =
-document.getElementById(
-"scannerResult"
-);
-
-const resultText =
-document.getElementById(
-"scannerResultText"
-);
-
-const openButton =
-document.getElementById(
-"openQRButton"
-);
-
-
-modal.classList.add("active");
-
-modal.setAttribute(
-"aria-hidden",
-"false"
-);
-
-
-status.textContent =
-"Starting camera…";
-
-status.classList.remove(
-"detected"
-);
-
-
-result.classList.remove(
-"show"
-);
-
-
-resultText.textContent =
-"";
-
-
-openButton.disabled =
-true;
-
-
-qrResult =
-"";
-
-qrResultIsLink =
-false;
-
-scannerBusy =
-false;
-
-
-if(
-typeof jsQR === "undefined"
-){
-
-status.textContent =
-"Scanner library could not be loaded.";
-
-return;
-
-}
-
-
-if(
-!navigator.mediaDevices ||
-!navigator.mediaDevices.getUserMedia
-){
-
-status.textContent =
-"Camera is not supported on this device.";
-
-return;
-
-}
-
-
-navigator.mediaDevices
-.getUserMedia({
-
-video:{
-facingMode:{
-ideal:"environment"
-},
-width:{
-ideal:1280
-},
-height:{
-ideal:1280
-}
-},
-
-audio:false
-
-})
-
-.then(function(stream){
-
-if(
-!document
-.getElementById("scannerModal")
-.classList
-.contains("active")
-){
-
-stream
-.getTracks()
-.forEach(function(track){
-track.stop();
-});
-
-return;
-
-}
-
-
-qrStream =
-stream;
-
-
-qrVideo.srcObject =
-stream;
-
-
-qrVideo.setAttribute(
-"playsinline",
-"true"
-);
-
-
-return qrVideo.play();
-
-})
-
-.then(function(){
-
-status.textContent =
-"Point your camera at a QR code";
-
-scanQRCode();
-
-})
-
-.catch(function(error){
-
-console.error(
-"QR camera error:",
-error
-);
-
-
-if(error.name ===
-"NotAllowedError"){
-
-status.textContent =
-"Camera permission was denied. Please allow camera access.";
-
-}else if(error.name ===
-"NotFoundError"){
-
-status.textContent =
-"No camera was found on this device.";
-
-}else if(error.name ===
-"NotReadableError"){
-
-status.textContent =
-"Camera is currently being used by another app.";
-
-}else{
-
-status.textContent =
-"Unable to start the camera.";
-
-}
-
-});
-
-}
-
-
-/* SCAN */
-
-function scanQRCode(){
-
-if(
-!document
-.getElementById("scannerModal")
-.classList
-.contains("active")
-){
-
-return;
-
-}
-
-
-if(scannerBusy){
-
-return;
-
-}
-
-
-if(
-qrVideo.readyState >=
-qrVideo.HAVE_ENOUGH_DATA
-){
-
-const width =
-qrVideo.videoWidth;
-
-const height =
-qrVideo.videoHeight;
-
-
-if(width && height){
-
-qrCanvas.width =
-width;
-
-qrCanvas.height =
-height;
-
-
-qrContext.drawImage(
-qrVideo,
-0,
-0,
-width,
-height
-);
-
-
-const imageData =
-qrContext.getImageData(
-0,
-0,
-width,
-height
-);
-
-
-const code =
-jsQR(
-imageData.data,
-imageData.width,
-imageData.height,
-{
-inversionAttempts:
-"attemptBoth"
-}
-);
-
-
-if(code && code.data){
-
-handleQRDetected(
-code.data
-);
-
-return;
-
-}
-
-}
-
-}
-
-
-qrAnimation =
-requestAnimationFrame(
-scanQRCode
-);
-
-}
-
-
-/* QR DETECTED */
-
-function handleQRDetected(data){
-
-if(scannerBusy){
-
-return;
-
-}
-
-
-scannerBusy =
-true;
-
-
-qrResult =
-data;
-
-
-const status =
-document.getElementById(
-"scannerStatus"
-);
-
-const result =
-document.getElementById(
-"scannerResult"
-);
-
-const resultText =
-document.getElementById(
-"scannerResultText"
-);
-
-const openButton =
-document.getElementById(
-"openQRButton"
-);
-
-
-status.textContent =
-"✓ QR Code Detected";
-
-status.classList.add(
-"detected"
-);
-
-
-resultText.textContent =
-data;
-
-
-result.classList.add(
-"show"
-);
-
-
-qrResultIsLink =
-isValidURL(data);
-
-
-openButton.disabled =
-!qrResultIsLink;
-
-
-if(qrResultIsLink){
-
-openButton.textContent =
-"OPEN LINK";
-
-}else{
-
-openButton.textContent =
-"NOT A LINK";
-
-}
-
-
-if(navigator.vibrate){
-
-navigator.vibrate(
-[100,50,100]
-);
-
-}
-
-
-stopQRCamera();
-
-}
-
-
-/* CHECK URL */
-
-function isValidURL(value){
-
-try{
-
-const url =
-new URL(value);
-
-
-return(
-url.protocol ===
-"http:" ||
-url.protocol ===
-"https:"
-);
-
-}catch(error){
-
-return false;
-
-}
-
-}
-
-
-/* OPEN RESULT */
-
-function openQRResult(){
-
-if(
-!qrResult ||
-!qrResultIsLink
-){
-
-return;
-
-}
-
-
-window.open(
-qrResult,
-"_blank",
-"noopener,noreferrer"
-);
-
-}
-
-
-/* COPY RESULT */
-
-async function copyQRResult(){
-
-if(!qrResult){
-
-return;
-
-}
-
-
-try{
-
-if(
-navigator.clipboard &&
-navigator.clipboard.writeText
-){
-
-await navigator.clipboard.writeText(
-qrResult
-);
-
-}else{
-
-throw new Error(
-"Clipboard unavailable"
-);
-
-}
-
-
-const status =
-document.getElementById(
-"scannerStatus"
-);
-
-status.textContent =
-"✓ Result copied to clipboard";
-
-status.classList.add(
-"detected"
-);
-
-
-}catch(error){
-
-const textArea =
-document.createElement(
-"textarea"
-);
-
-
-textArea.value =
-qrResult;
-
-
-textArea.style.position =
-"fixed";
-
-textArea.style.left =
-"-9999px";
-
-
-document.body.appendChild(
-textArea
-);
-
-
-textArea.select();
-
-
-try{
-
-document.execCommand(
-"copy"
-);
-
-alert(
-"QR result copied!"
-);
-
-}catch(e){
-
-alert(
-"Unable to copy automatically. Please select the result manually."
-);
-
-}
-
-
-textArea.remove();
-
-}
-
-}
-
-
-/* STOP CAMERA */
-
-function stopQRCamera(){
-
-if(qrAnimation){
-
-cancelAnimationFrame(
-qrAnimation
-);
-
-qrAnimation =
-null;
-
-}
-
-
-if(qrStream){
-
-qrStream
-.getTracks()
-.forEach(function(track){
-
-track.stop();
-
-});
-
-qrStream =
-null;
-
-}
-
-
-if(qrVideo){
-
-qrVideo.srcObject =
-null;
-
-}
-
-}
-
-
-/* CLOSE SCANNER */
-
-function closeQRScanner(){
-
-stopQRCamera();
-
-
-const modal =
-document.getElementById(
-"scannerModal"
-);
-
-
-modal.classList.remove(
-"active"
-);
-
-
-modal.setAttribute(
-"aria-hidden",
-"true"
-);
-
-
-scannerBusy =
-false;
-
-}
-
-
-/* CLICK OUTSIDE TO CLOSE */
-
-document
-.getElementById("scannerModal")
-.addEventListener(
-"click",
-function(event){
-
-if(event.target === this){
-
-closeQRScanner();
-
-}
-
-});
-
-
-/* ESCAPE KEY */
-
-document.addEventListener(
-"keydown",
-function(event){
-
-if(event.key === "Escape"){
-
-const modal =
-document.getElementById(
-"scannerModal"
-);
-
-if(
-modal.classList
-.contains("active")
-){
-
-closeQRScanner();
-
-}
-
-}
-
-});
-
-
-/* STOP CAMERA WHEN PAGE IS HIDDEN */
-
-document.addEventListener(
-"visibilitychange",
-function(){
-
-if(
-document.hidden
-){
-
-stopQRCamera();
-
-}
+    if(e.target === modal){
+        closeModal();
+    }
 
 });
 
